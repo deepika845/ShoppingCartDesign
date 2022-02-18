@@ -99,8 +99,8 @@
   color: #fff;
 }
 .dish-offer-data__content {
-  margin: 0 2% 0%;
-  padding: 20px 20px;
+  margin: 0 2% 0% 2%;
+  padding: 20px 2px 0px 0px;
 }
 .dish-offer-data__content1 {
   position: relative;
