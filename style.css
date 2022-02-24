@@ -220,7 +220,7 @@ body {
 }
 .product-items-details__img {
   position: relative;
-  margin-left: 1rem;
+  margin: 1rem;
 }
 .add-remove {
   position: absolute;
@@ -345,7 +345,7 @@ body {
   font-size: 1rem;
   font-weight: 600;
   display: flex;
-
+  margin-top: 1rem;
   justify-content: space-between;
 }
 .checkout-button {
@@ -363,4 +363,46 @@ body {
 }
 .checkout-button:hover {
   box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.5);
+}
+.header-locality {
+  color: #3d4152;
+  float: left;
+}
+.dish-offer-image {
+  width: 254px;
+  height: 165px;
+  border-radius: 0.3rem;
+}
+.dish-offer-text--style {
+  font-weight: 300;
+  font-size: 2rem;
+}
+.dish-offer--location {
+  font-size: 0.875rem;
+  font-weight: 300;
+  padding: 0.25rem;
+}
+.item-bestseller {
+  font-weight: 500;
+  color: #ee9c00;
+}
+.veg-symbol {
+  height: 1.11rem;
+}
+.dish-items-width {
+  width: 7.37rem;
+}
+.selected-cart-item-text {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+.item-selected--count {
+  color: #686b78;
+  padding-top: 0.5rem;
+  font-size: 0.8rem;
+}
+.selected-cart__extra-charge {
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #7e808c;
 }
