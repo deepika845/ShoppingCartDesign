@@ -406,3 +406,7 @@ body {
   font-weight: 300;
   color: #7e808c;
 }
+ul {
+  list-style: none;
+  padding: 0rem;
+}

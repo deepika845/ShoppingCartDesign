@@ -17,12 +17,12 @@ import menuList from "./Models/MenuListModel.js";
     }
   }
   function getIndex(item) {
-    const sideBarList = document.querySelector(".category");
+    const sideBarList = document.querySelector(".category_side-bar");
     console.log(sideBarList);
-    const len = sideBarList.childNodes.length;
+    const len = sideBarList.children.length;
     console.log(len);
     for (let i = 0; i < len; i++) {
-      if (sideBarList.childNodes[i] === item) {
+      if (sideBarList.children[i] === item) {
         return i;
       }
     }
@@ -42,14 +42,19 @@ import menuList from "./Models/MenuListModel.js";
   }
   function init() {
     //console.log("Hello");
-    const sidebarList = document.querySelector(".category");
+    const sidebarList = document.querySelector(".category_side-bar");
     sidebarList.addEventListener("click", changeActiveMenu);
     state.activeMenuList = menuItems[0];
     render();
   }
+  function clearList() {
+    const sidebar = document.querySelector(".category_side-bar");
+    sidebar.innerHTML = "";
+  }
   function render() {
     console.log(state.activeMenuList);
   }
+
   window.onload = function () {
     init();
   };
