@@ -12,4 +12,4 @@ const menuList = [
   "Burger",
   "Pasta",
 ];
-export { menuList };
+export default menuList;

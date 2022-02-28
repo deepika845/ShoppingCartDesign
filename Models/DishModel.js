@@ -8,7 +8,7 @@ import {
   AchariPaneerTikka,
   PaneerMalaiTikka,
 } from "./ImageConstants.js";
-function Dish(dishName, isVeg, isBestSeller, price, desc, image, category) {
+function Dish(dishName, isVeg, isBestSeller, price, desc, image) {
   this.dishName = dishName;
   this.isVeg = isVeg;
   this.isBestSeller = isBestSeller;
@@ -22,7 +22,7 @@ function DishModel() {
   this.isBestSeller = false;
   this.price = 0;
   this.desc = "";
-  this.image = image;
+  this.image = "";
 
   this.setName = function (dishName) {
     this.dishName = dishName;
@@ -113,4 +113,4 @@ const menuItems = {
       .setImage(VegPlatter),
   ],
 };
-export { menuItems };
+export default menuItems;
