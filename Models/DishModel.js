@@ -61,7 +61,7 @@ function DishModel() {
   };
 }
 const menuItems = {
-  recommended: [
+  Recommended: [
     new DishModel()
       .setName("Chilli Garlic Noodles")
       .setIsVeg(true)

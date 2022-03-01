@@ -173,7 +173,7 @@ body {
   padding-top: 0.3125rem;
   font-weight: 400;
 }
-.category-link:first-child {
+.category-link-active {
   color: #fc8019;
   font-weight: 600;
 }
@@ -249,8 +249,8 @@ body {
 }
 .product--category__container {
   border-bottom: 0.13rem solid #282c3f;
-  margin-top: 1.277rem;
 }
+
 .product-details-headline {
   font-size: 2rem;
   font-weight: 600;
