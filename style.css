@@ -294,7 +294,7 @@ body {
   margin: 1rem;
   position: sticky;
   top: 1rem;
-  width: 18.625rem;
+  width: 22rem;
   display: flex;
   display: inline-block;
 }
@@ -316,8 +316,6 @@ body {
 .selected-item-name {
   font-size: 0.875rem;
   font-weight: 400;
-  margin-left: 0.4375rem;
-  margin-right: 28px;
 }
 
 .selected-item-quantity {
@@ -327,7 +325,7 @@ body {
   border: 0.0625rem solid #d4d5d9;
   color: #60b246;
   font-weight: 600;
-  width: 4.38rem;
+  width: 7rem;
   line-height: 1.875rem;
   text-align: center;
   background-color: #fff;

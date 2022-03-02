@@ -4,15 +4,23 @@ import menuList from "./Models/MenuListModel.js";
 (function app() {
   const actions = {
     change_active_menu: "change_active_menu",
+    add_to_cart: "add_to_cart",
+    increase_in_cart: "increase_in_cart",
   };
-  let state = { activeMenu: 0, activeMenuList: [] };
+  let state = { activeMenu: 0, activeMenuList: [], cart: [] };
   function changeState(state, action, payload) {
     switch (action) {
       case actions.change_active_menu:
-        //console.log("Entered");
         const { ind, menuitems } = payload;
         state.activeMenu = ind;
         state.activeMenuList = menuitems;
+        return state;
+      case actions.add_to_cart:
+        const { isVeg, dishName, price, qty } = payload;
+        state.cart = [...state.cart, payload];
+        return state;
+      case actions.increase_in_cart:
+        state.cart[payload].qty += 1;
         return state;
 
       default:
@@ -21,9 +29,9 @@ import menuList from "./Models/MenuListModel.js";
   }
   function getIndex(item) {
     const sideBarList = document.querySelector(".category_side-bar");
-    //console.log(sideBarList);
+
     const len = sideBarList.children.length;
-    //console.log(len);
+
     for (let i = 0; i < len; i++) {
       if (sideBarList.children[i] === item) {
         return i;
@@ -31,13 +39,20 @@ import menuList from "./Models/MenuListModel.js";
     }
     return 0;
   }
+
+  function getIndexInMenu(target, contentList) {
+    for (let i = 0; i < contentList.children.length; i++) {
+      if (contentList.children[i] === target) {
+        return i;
+      }
+    }
+    return 0;
+  }
   function changeActiveMenu(e) {
-    //  console.log("hey");
     const item = e.target;
     console.log(e.target);
     const ind = getIndex(item);
-    //console.log(ind);
-    //console.log(menuList[ind]);
+
     const menuitems = menuItems[menuList[ind]];
     const updatedState = changeState(state, "change_active_menu", {
       ind,
@@ -48,20 +63,68 @@ import menuList from "./Models/MenuListModel.js";
     console.log(state);
     render();
   }
+  function changeCartList(e) {
+    console.log("Hey");
+
+    if (e.target.classList[0] === "add-button") {
+      const targetItem = e.target.parentNode.parentNode;
+      const menuList = document.querySelector(".product-list");
+
+      /*<div class="selected-item-quantity">
+            <div class="add-remove-1">+</div>
+            <div class="add-remove-1">${qty}</div>
+            <div class="add-remove-1">-</div> */
+
+      const index = getIndexInMenu(targetItem, menuList);
+      console.log(index);
+      const { isVeg, dishName, price } = state.activeMenuList[index];
+      const updatedState = changeState(state, "add_to_cart", {
+        isVeg,
+        dishName,
+        price,
+        qty: 1,
+      });
+      state = updatedState;
+
+      render();
+    }
+  }
+
+  function increaseCount(e) {
+    console.log("hiiii");
+    const cartItem = e.target.parentNode.parentNode;
+    const cartList = document.querySelector(".selected-item");
+    const idx = getIndexInMenu(cartItem, cartList);
+    console.log(idx);
+    const updatedState = changeState(state, "increase_in_cart", idx);
+    state = updatedState;
+    render();
+  }
   function init() {
-    //console.log("Hello");
+    console.log("Hello");
 
     const sidebarList = document.querySelector(".category_side-bar");
+
     sidebarList.addEventListener("click", changeActiveMenu);
+
     state.activeMenu = 0;
     state.activeMenuList = menuItems["Recommended"];
     render();
+
+    const addButton = document.querySelector(".add-button");
+    addButton.addEventListener("click", changeCartList);
+
+    const addPlus = document.querySelector(".plus");
+    addPlus && addPlus.addEventListener("click", increaseCount);
   }
   function clearList() {
     const sidebar = document.querySelector(".category_side-bar");
+
     sidebar.innerHTML = "";
     const contentList = document.querySelector(".product-list");
     contentList.innerHTML = "";
+    const cartList = document.querySelector(".selected-item");
+    cartList.innerHTML = "";
   }
   function renderSideBar() {
     const sideBarMenu = document.querySelector(".category_side-bar");
@@ -88,6 +151,14 @@ import menuList from "./Models/MenuListModel.js";
     } ITEMS`;
   }
   function renderMenuItems(item) {
+    let qty;
+    for (let i = 0; i < state.cart.length; i++) {
+      if (item.dishName === state.cart[i].dishName) {
+        qty = state.cart[i].qty;
+        break;
+      }
+    }
+
     const contentList = document.querySelector(".product-list");
     const { dishName, isVeg, isBestSeller, price, desc, image } = item;
     let contentListItem = document.createElement("li");
@@ -120,18 +191,58 @@ import menuList from "./Models/MenuListModel.js";
                         src=${image}
                         alt="garlic-noodles"
                       />
-                      <div class="add-button">ADD</div>
+                     ${
+                       qty
+                         ? `<div class="selected-item-quantity">
+                           <div class="add-remove-1 plus">+</div>
+                           <div class="add-remove-1">${qty}</div>
+                           <div class="add-remove-1 minus">-</div>
+                         </div>
+                       `
+                         : `
+                         <div class="add-button">ADD</div>
+                       `
+                     }
                     </div>`;
     contentList.appendChild(contentListItem);
   }
+  function renderCartItems(item) {
+    const { isVeg, dishName, price, qty } = item;
+    const cartList = document.querySelector(".selected-item");
+    const addItem = document.createElement("div");
+    addItem.setAttribute("class", "selected-item--first");
+    addItem.innerHTML = `<img
+            class="veg-symbol"
+            src=${isVeg ? VegLogo : NonVegLogo}
+            alt="veg-symbol"
+            />
+            <div class="selected-item-name">${dishName}</div>
+            <div class="selected-item-quantity">
+            <div class="add-remove-1 plus">+</div>
+            <div class="add-remove-1">${qty}</div>
+            <div class="add-remove-1 minus">-</div>
+            </div>
+
+           <div class="item-price">₹ ${price}</div>`;
+    cartList.appendChild(addItem);
+    const addPlus = document.querySelector(".plus");
+    addPlus && addPlus.addEventListener("click", increaseCount);
+  }
   function render() {
-    //console.log("Hey");
     clearList();
     renderSideBar();
     renderMenuHeading();
     for (let i = 0; i < state.activeMenuList.length; i++) {
       renderMenuItems(state.activeMenuList[i]);
     }
+
+    const addButton = document.querySelector(".add-button");
+    addButton !== null && addButton.addEventListener("click", changeCartList);
+
+    for (let i = 0; i < state.cart.length; i++) {
+      renderCartItems(state.cart[i]);
+    }
+    console.log(state.cart);
   }
 
   window.onload = function () {
