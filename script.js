@@ -6,6 +6,7 @@ import menuList from "./Models/MenuListModel.js";
     change_active_menu: "change_active_menu",
     add_to_cart: "add_to_cart",
     increase_in_cart: "increase_in_cart",
+    decrease_in_cart: "decrease_in_cart",
   };
   let state = { activeMenu: 0, activeMenuList: [], cart: [] };
   function changeState(state, action, payload) {
@@ -21,6 +22,12 @@ import menuList from "./Models/MenuListModel.js";
         return state;
       case actions.increase_in_cart:
         state.cart[payload].qty += 1;
+        return state;
+      case actions.decrease_in_cart:
+        state.cart[payload].qty -= 1;
+        if (state.cart[payload].qty == 0) {
+          state.cart = state.cart.filter((curr, index) => payload !== index);
+        }
         return state;
 
       default:
@@ -100,6 +107,15 @@ import menuList from "./Models/MenuListModel.js";
     state = updatedState;
     render();
   }
+  function decreaseCount(e) {
+    const cartItem = e.target.parentNode.parentNode;
+    const cartList = document.querySelector(".selected-item");
+    const idx = getIndexInMenu(cartItem, cartList);
+    console.log(idx);
+    const updatedState = changeState(state, "decrease_in_cart", idx);
+    state = updatedState;
+    render();
+  }
   function init() {
     console.log("Hello");
 
@@ -110,12 +126,6 @@ import menuList from "./Models/MenuListModel.js";
     state.activeMenu = 0;
     state.activeMenuList = menuItems["Recommended"];
     render();
-
-    const addButton = document.querySelector(".add-button");
-    addButton.addEventListener("click", changeCartList);
-
-    const addPlus = document.querySelector(".plus");
-    addPlus && addPlus.addEventListener("click", increaseCount);
   }
   function clearList() {
     const sidebar = document.querySelector(".category_side-bar");
@@ -126,6 +136,26 @@ import menuList from "./Models/MenuListModel.js";
     const cartList = document.querySelector(".selected-item");
     cartList.innerHTML = "";
   }
+  function renderCartItemCount() {
+    let qty = 0;
+    for (let i = 0; i < state.cart.length; i++) {
+      qty += state.cart[i].qty;
+    }
+    document.querySelector(".item-selected--count").innerHTML = `${qty} ITEMS`;
+  }
+  function renderTotalAmount() {
+    let totalAmount = 0;
+    for (let i = 0; i < state.cart.length; i++) {
+      totalAmount += state.cart[i].qty * state.cart[i].price;
+    }
+    const totalCharge = document.querySelector(".total-charge");
+    totalCharge.innerHTML =
+      totalAmount == 0
+        ? `No Cart Items`
+        : `<div>Subtotal</div>
+                       <div>${totalAmount}</div>`;
+  }
+
   function renderSideBar() {
     const sideBarMenu = document.querySelector(".category_side-bar");
     for (let i = 0; i < menuList.length; i++) {
@@ -225,23 +255,33 @@ import menuList from "./Models/MenuListModel.js";
 
            <div class="item-price">₹ ${price}</div>`;
     cartList.appendChild(addItem);
-    const addPlus = document.querySelector(".plus");
-    addPlus && addPlus.addEventListener("click", increaseCount);
   }
   function render() {
     clearList();
     renderSideBar();
     renderMenuHeading();
+    renderCartItemCount();
     for (let i = 0; i < state.activeMenuList.length; i++) {
       renderMenuItems(state.activeMenuList[i]);
     }
 
     const addButton = document.querySelector(".add-button");
-    addButton !== null && addButton.addEventListener("click", changeCartList);
+    addButton && addButton.addEventListener("click", changeCartList);
 
     for (let i = 0; i < state.cart.length; i++) {
       renderCartItems(state.cart[i]);
     }
+    const addPlus = document.querySelectorAll(".plus");
+    for (let i = 0; i < addPlus.length; i++) {
+      addPlus[i].addEventListener("click", increaseCount);
+    }
+    // addPlus && addPlus.addEventListener("click", increaseCount);
+
+    const dec = document.querySelectorAll(".minus");
+    for (let i = 0; i < addPlus.length; i++) {
+      dec[i].addEventListener("click", decreaseCount);
+    }
+    renderTotalAmount();
     console.log(state.cart);
   }
 
