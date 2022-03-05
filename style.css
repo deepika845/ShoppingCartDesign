@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
 * {
   font-family: "Lato", sans-serif;
+  box-sizing: border-box;
 }
 body {
   margin: 0.5rem;
@@ -99,7 +100,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 13rem;
+  height: 14rem;
 }
 .dish-offer-data__content1 {
   position: relative;
@@ -411,12 +412,39 @@ ul {
 .search-veg-only-filter {
   height: 4rem;
   padding: 1rem;
-  box-sizing: border-box;
 }
-.search {
-  background-color: white;
-  width: 9rem;
+
+.search-filter {
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
 }
-.veg-only {
-  background-color: white;
+.search_for_dishes {
+  width: 15rem;
+  box-shadow: 0 3px 15px 0 rgb(40 44 63 / 10%);
+
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.75rem;
 }
+.search_for_dishes i {
+  color: #282c3f;
+}
+.search_for_dishes_input {
+  height: 100%;
+  border: none;
+  outline: none;
+}
+.search_for_dishes_input::placeholder {
+  font-weight: 700;
+}
+.search_with_veg_only {
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  box-shadow: 0 3px 15px 0 rgb(40 44 63 / 10%);
+}
+
+/****************************************** VEG ONLY ******************************************************/

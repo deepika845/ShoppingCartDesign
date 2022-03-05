@@ -2,11 +2,14 @@ import {
   FoodOffer,
   HeaderLogo,
   VegLogo,
+  SweetCornSoup,
+  ManchowSoup,
   MixedPlatter,
   VegPlatter,
+  NonVegPlatter,
   ChilliGarlicNoodles,
+  MethiChickenTikka,
   AchariPaneerTikka,
-  PaneerMalaiTikka,
 } from "./ImageConstants.js";
 function Dish(dishName, isVeg, isBestSeller, price, desc, image) {
   this.dishName = dishName;
@@ -91,6 +94,15 @@ const menuItems = {
         "An authentic veg platter with 3 pieces of Paneer Achari, 3 pieces of Hara Bhara, 3 pieces of Veg Seekh and 3 pieces of Malai Chaap."
       )
       .setImage(VegPlatter),
+    new DishModel()
+      .setName("NonVeg Platter")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(899)
+      .setDescription(
+        "An authentic non veg platter with 3 pieces of Barnala Mathi Chicken Tikka, 3 pieces of Dhaniya Chicken, 3 pieces of Tawa Chicken and 3 pieces of Chicken Kebab."
+      )
+      .setImage(NonVegPlatter),
   ],
   Starters: [
     new DishModel()
@@ -101,16 +113,37 @@ const menuItems = {
       .setDescription(
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
-      .setImage(MixedPlatter),
+      .setImage(AchariPaneerTikka),
     new DishModel()
-      .setName("Veg Platter")
-      .setIsVeg(true)
+      .setName("Methi Chicken Tikka Barnala ")
+      .setIsVeg(false)
       .setBestSeller(false)
       .setPrice(250)
       .setDescription(
-        "An authentic veg platter with 3 pieces of Paneer Achari, 3 pieces of Hara Bhara, 3 pieces of Veg Seekh and 3 pieces of Malai Chaap."
+        "Barnala-style tender chicken Tikka flavoured with aromatic Methi."
       )
-      .setImage(VegPlatter),
+      .setImage(MethiChickenTikka),
+  ],
+  Soups: [
+    new DishModel()
+      .setName("Manchow Soup")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(160)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(ManchowSoup),
+
+    new DishModel()
+      .setName("Sweet Corn Soup")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(150)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(SweetCornSoup),
   ],
 };
 export default menuItems;

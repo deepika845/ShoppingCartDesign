@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <script type="module" src="./script.js"></script>
@@ -115,18 +119,24 @@
               </div>
             </div>
           </div>
-          <div class="search-veg-only-filter">
-            <div class="search">
-              <input type="text" placeholder="Search for dishes" />
-            </div>
-            <div class="veg-only">
-              <label for="vegSelect">VegOnly</label>
+          <div class="search-filter">
+            <div class="search_for_dishes">
+              <i class="fa fa-search"></i>
               <input
-                id="vegSelect"
-                type="checkbox"
-                style="border: 1.5px solid #7e808c"
-                ;
+                class="search_for_dishes_input"
+                type="text"
+                placeholder="Search for dishes..."
               />
+            </div>
+            <div class="search_with_veg_only">
+              <input
+                id="veg-only-check-box"
+                type="checkbox"
+                class="veg-only-check-box"
+              />
+              <label style="color: #282c3f" for="veg-only-check-box"
+                >Veg Only</label
+              >
             </div>
           </div>
         </div>
