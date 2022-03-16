@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
+.search-filter {
+  display: flex;
+  justify-content: center;
+  height: 2.5rem;
+  margin: -1rem;
+}
+.search_for_dishes {
+  width: 15rem;
+  box-shadow: 0 3px 15px 0 rgb(40 44 63 / 10%);
+
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.75rem;
+}
+.search_for_dishes i {
+  color: #282c3f;
+}
+.search_for_dishes_input {
+  height: 100%;
+  border: none;
+  outline: none;
+}
+.search_for_dishes_input::placeholder {
+  font-weight: 700;
+}
+.search_with_veg_only {
+  background-color: #fff;
+  padding: 0.5rem;
+  margin-left: 1rem;
+  box-shadow: 0 3px 15px 0 rgb(40 44 63 / 10%);
+}
+.search-veg-only-filter {
+  height: 4rem;
+  padding: 1rem;
+}
+.label-style{
+    
+    color: #282c3f
+}

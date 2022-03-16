@@ -1,0 +1,8 @@
+.dishOffer {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+}
+h1 {
+  font-weight: 300;
+}

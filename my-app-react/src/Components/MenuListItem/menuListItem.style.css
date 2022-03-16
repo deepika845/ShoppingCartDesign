@@ -1,0 +1,14 @@
+.dish-item {
+  line-height: 1.5rem;
+}
+.menu-link {
+  cursor: pointer;
+}
+.menu-link:hover {
+  color: #fc8019;
+  font-weight: 600;
+}
+.menu--active {
+  color: #fc8019;
+  font-weight: 600;
+}
