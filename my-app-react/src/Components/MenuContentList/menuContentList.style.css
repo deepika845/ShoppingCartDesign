@@ -94,3 +94,9 @@
   margin-top: 1rem;
   justify-content: space-between;
 }
+.border-radius {
+  border-radius: 6px;
+}
+.dish-items-width {
+  width: 7.37rem;
+}

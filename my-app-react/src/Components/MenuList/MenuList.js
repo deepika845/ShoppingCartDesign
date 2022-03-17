@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 function MenuList(props) {
 
   const selectTheMenuItem = (event) => {
+    console.log(event.target.textContent)
     props.onSelect(event.target.textContent);
+    
   };
   // const [activeState, setActiveState] = useState('Recommended');
   // function selectTheMenuItem(index) {

@@ -1,6 +1,7 @@
 import "./menuContentList.style.css";
 import menuItems from "../../Models/dishModel";
-import { VegLogo } from "../../Models/ImageConstants";
+import { MixedPlatter }  from "../../Models/ImageConstants";
+import { VegLogo }  from "../../Models/ImageConstants";
 import { NonVegLogo } from "../../Models/ImageConstants";
 import MenuContentItem from "../MenuContentItem/MenuContentItem";
 function MenuContentList(props) {
@@ -42,7 +43,7 @@ function MenuContentList(props) {
                 <div>
                   <img
                     className="veg-symbol"
-                    src={isVeg ? VegLogo : NonVegLogo}
+                    src={isVeg ?  VegLogo : NonVegLogo }
                     alt="veg-symbol"
                   />
                 </div>

@@ -19,7 +19,10 @@ const App = () => {
   const [currCartItems, setCartItems] = useState([]);
   function selectedHandler(currItem) {
     setActiveMenu(currItem);
-    setActiveMenuItem(menuItems[activeMenu]);
+    let updatedMenuItems = [];
+    updatedMenuItems = [...updatedMenuItems, ...menuItems[currItem]]
+    console.log("update after selection :",updatedMenuItems)
+    setActiveMenuItem(updatedMenuItems);
   }
   function increaseInCart(myname) {
     console.log("increase in cart", myname);
@@ -123,7 +126,7 @@ const App = () => {
     setActiveMenuItem(activeMenuItems);
     setCartItems(currCartItems);
     console.log("after veg filter", currCartItems);
-    console.log("after veg filter", activeMenuItems);
+    console.log("my menu items", activeMenuItems);
   }, [activeMenu, currCartItems, activeMenuItems]);
 
   return (
