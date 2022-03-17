@@ -5,20 +5,21 @@ import Header from "./Components/Header/Header.js";
 import BreadCrumb from "./Components/BreadCrumbList/BreadCrumb.js";
 import DishOffer from "./Components//DishOffer/DishOffer.js";
 import MiddleContainer from "./Components/MiddleContainer/MiddleContainer";
-import DishDetails from "./Components/DishDetails/DishDetails.js";
 import FoodOffer from "./Images/Food_Offer.png";
-import SearchFilter from "./Components/SearchFilter/SearchFilter.js"
+import SearchFilter from "./Components/SearchFilter/SearchFilter.js";
 import MenuList from "./Components/MenuList/MenuList.js";
 import MenuContentList from "./Components/MenuContentList/MenuContentList";
 import OfferPercent from "./Components/OfferPercent/OfferPercent";
 import CartItems from "./Components/CartItems/CartItems.js";
-import dishModel from "./Models/dishModel.js";
+import menuItems from "./Models/dishModel.js";
 import menuList from "./Models/menuListModel";
 const App = () => {
-  const [activeMenuItem, setActiveMenuItem] = useState("Recommended");
+  const [activeMenu, setActiveMenu] = useState("Recommended");
+  const [activeMenuItems, setActiveMenuItem] = useState(menuItems[activeMenu]);
   const [currCartItems, setCartItems] = useState([]);
   function selectedHandler(currItem) {
-    setActiveMenuItem(currItem);
+    setActiveMenu(currItem);
+    setActiveMenuItem(menuItems[activeMenu]);
   }
   function increaseInCart(myname) {
     console.log("increase in cart", myname);
@@ -45,7 +46,7 @@ const App = () => {
         updatedCartItems[i].qty -= 1;
         if (updatedCartItems[i].qty === 0) {
           updatedCartItems = updatedCartItems.filter((curr) => {
-           return curr.dishName !== myname;
+            return curr.dishName !== myname;
           });
         }
         console.log("updated one : ", updatedCartItems);
@@ -60,12 +61,70 @@ const App = () => {
     console.log("new cart items", updatedCartItems);
     setCartItems(updatedCartItems);
   }
+  function onSearchDish(keyword) {
+    console.log(keyword);
+    if (keyword === "") {
+      setActiveMenu(activeMenu);
+    }
+    let updatedMenuItems = [];
+    for (let i = 0; i < menuList.length; i++) {
+      const searchInMenu = menuItems[menuList[i]].filter((curr) =>
+        curr.dishName.toLowerCase().includes(keyword.toLowerCase())
+      );
+      updatedMenuItems = [...updatedMenuItems, ...searchInMenu];
+    }
+    setActiveMenuItem(updatedMenuItems);
+  }
+  function onFilter(isChecked) {
+    let updatedMenuItems = [];
+    if (isChecked) {
+      for (let i = 0; i < menuList.length; i++) {
+        const vegItems = menuItems[menuList[i]].filter((curr) => {
+          return curr.isVeg === true;
+        });
+        updatedMenuItems = [...updatedMenuItems, ...vegItems];
+      }
+    }
+    else {
+      updatedMenuItems = menuItems[activeMenu];
+    }
+    console.log(updatedMenuItems);
+    setActiveMenuItem(updatedMenuItems);
+    
+  }
+  function handlePromise() {
+    return new Promise(function (resolve, reject) {
+      const userdata = fetch("https://api.github.com/users").then(
+        (response) => {
+          if (response.status === 200) {
+            alert("Success...")
+            resolve();
+          } else {
+            reject("Error found");
+          }
+        }
+      );
+    });
+  }
+  function addToLocalStorage() {
+    handlePromise().then(
+      function () {
+        localStorage.setItem("cartList", JSON.stringify(currCartItems));
+        console.log(JSON.parse(localStorage.getItem("cartList")));
+      },
+      function (param) {
+        console.log(param);
+      }
+    );
+  }
 
   useEffect(() => {
-    setActiveMenuItem(activeMenuItem);
+    setActiveMenu(activeMenu);
+    setActiveMenuItem(activeMenuItems);
     setCartItems(currCartItems);
-    //console.log("increase in cart", currCartItems);
-  }, [activeMenuItem, currCartItems]);
+    console.log("after veg filter", currCartItems);
+    console.log("after veg filter", activeMenuItems);
+  }, [activeMenu, currCartItems, activeMenuItems]);
 
   return (
     <React.StrictMode>
@@ -78,20 +137,25 @@ const App = () => {
 
         <OfferPercent />
       </MiddleContainer>
-      <SearchFilter></SearchFilter>
+      <SearchFilter
+        onSearchDish={onSearchDish}
+        onFilter={onFilter}
+      ></SearchFilter>
       <div className="test">
-        <MenuList onSelect={selectedHandler} activeMenuu={activeMenuItem} />
+        <MenuList onSelect={selectedHandler} activeMenu={activeMenu} />
         <MenuContentList
-          activeMenuItem={activeMenuItem}
+          activeMenu={activeMenu}
+          activeMenuList={activeMenuItems}
           addToCart={addToCart}
           currCartItems={currCartItems}
           increaseInCart={increaseInCart}
-          decreaseInCart ={decreaseInCart}
+          decreaseInCart={decreaseInCart}
         />
         <CartItems
           allCartItems={currCartItems}
           increaseInCart={increaseInCart}
-          decreaseInCart ={decreaseInCart}
+          decreaseInCart={decreaseInCart}
+          addToLocalStorage={addToLocalStorage}
         />
       </div>
     </React.StrictMode>

@@ -20,6 +20,9 @@ function CartItems(props) {
       totalAmount += (props.allCartItems[i].qty * props.allCartItems[i].price);
     }
   }
+  function handleCheckout(event) {
+    props.addToLocalStorage();
+  }
   totalItems();
   totalPrice();
   return (
@@ -65,11 +68,11 @@ function CartItems(props) {
         })}
       </ul>
       <div>Extra Charges may apply</div>
-      {totalAmount!==0 ?  <div class="total-charge">
+      {totalAmount!==0 ?  <div className="total-charge">
             <div>Subtotal</div>
             <div>₹ {totalAmount}</div>
           </div>:``}
-      <button className="checkout-button">Checkout</button>
+      <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
     </div>
   );
 }

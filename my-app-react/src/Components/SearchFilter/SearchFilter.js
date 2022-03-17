@@ -1,26 +1,33 @@
 import "./searchFilter.style.css";
 import { FaSearch } from "react-icons/fa";
 
-function SearchFilter() {
+function SearchFilter(props) {
+  function handleInput(event) {
+    props.onSearchDish(event.target.value);
+  }
+  function handleFilter(event) {
+    props.onFilter(event.target.checked);
+    console.log(event.target.checked);
+  }
   return (
-    <div class="search-filter">
-      <div class="search_for_dishes">
-        <FaSearch/>
-        <input 
-          class="search_for_dishes_input"
+    <div className="search-filter">
+      <div className="search_for_dishes">
+        <FaSearch />
+        <input
+          className="search_for_dishes_input"
           type="text"
           placeholder="Search for dishes..."
+          onChange={handleInput}
         />
       </div>
-      <div class="search_with_veg_only">
+      <div className="search_with_veg_only">
         <input
+          onChange={handleFilter}
           id="veg-only-check-box"
           type="checkbox"
-          class="veg-only-check-box"
+          className="veg-only-check-box"
         />
-        <label  for="veg-only-check-box">
-          Veg Only
-        </label>
+        <label htmlFor="veg-only-check-box">Veg Only</label>
       </div>
     </div>
   );

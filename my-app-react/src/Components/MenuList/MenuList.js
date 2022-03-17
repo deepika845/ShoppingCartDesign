@@ -21,7 +21,7 @@ function MenuList(props) {
         <li className="dish-item" key={index} onClick={selectTheMenuItem}>
           <a
             className={
-              item === props.activeMenuu ? "menu-link menu--active" : "menu-link"
+              item === props.activeMenu ? "menu-link menu--active" : "menu-link"
             }
           >
             {item}

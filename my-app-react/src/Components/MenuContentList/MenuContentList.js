@@ -15,15 +15,15 @@ function MenuContentList(props) {
   function decreaseTheCount(dishName) {
     props.decreaseInCart(dishName);
   }
-  const activeMenuList = menuItems[props.activeMenuItem];
+  //const activeMenuList = menuItems[props.activeMenuItem];
   return (
     <div className="menu-content-list">
       <div className="menuHeading">
-        <h1 className="content-List-heading">{props.activeMenuItem}</h1>
-        <h3 className="num-items">{activeMenuList.length} Items</h3>
+        <h1 className="content-List-heading">{props.activeMenu}</h1>
+        <h3 className="num-items">{props.activeMenuList.length} Items</h3>
       </div>
       <ul className="product-list">
-        {activeMenuList.map((curr) => {
+        {props.activeMenuList.map((curr) => {
           const { dishName, isVeg, price, desc, image } = curr;
           let qty = 0;
           for (let i = 0; i < props.currCartItems.length; i++) {
