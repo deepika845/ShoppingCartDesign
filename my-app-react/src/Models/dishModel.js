@@ -1,7 +1,4 @@
 import {
-  FoodOffer,
-  HeaderLogo,
-  VegLogo,
   SweetCornSoup,
   ManchowSoup,
   MixedPlatter,
@@ -53,7 +50,7 @@ function DishModel() {
   };
 
   this.build = function () {
-    let newDish = new Dish(
+    return new Dish(
       this.dishName,
       this.isVeg,
       this.isBestSeller,
@@ -73,7 +70,7 @@ const menuItems = {
       .setDescription(
         "Asian Chinese-style garlic noodles recipe includes noodles cooked with dry red chilies and red chili sauce for a vibrant, lightly spicy dish."
       )
-      .setImage(ChilliGarlicNoodles),
+      .setImage(ChilliGarlicNoodles).build(),
   ],
   Platters: [
     new DishModel()
@@ -84,7 +81,7 @@ const menuItems = {
       .setDescription(
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
-      .setImage(MixedPlatter),
+      .setImage(MixedPlatter).build(),
     new DishModel()
       .setName("Veg Platter")
       .setIsVeg(true)
@@ -93,7 +90,7 @@ const menuItems = {
       .setDescription(
         "An authentic veg platter with 3 pieces of Paneer Achari, 3 pieces of Hara Bhara, 3 pieces of Veg Seekh and 3 pieces of Malai Chaap."
       )
-      .setImage(VegPlatter),
+      .setImage(VegPlatter).build(),
     new DishModel()
       .setName("NonVeg Platter")
       .setIsVeg(false)
@@ -102,7 +99,7 @@ const menuItems = {
       .setDescription(
         "An authentic non veg platter with 3 pieces of Barnala Mathi Chicken Tikka, 3 pieces of Dhaniya Chicken, 3 pieces of Tawa Chicken and 3 pieces of Chicken Kebab."
       )
-      .setImage(NonVegPlatter),
+      .setImage(NonVegPlatter).build(),
   ],
   Starters: [
     new DishModel()
@@ -113,7 +110,7 @@ const menuItems = {
       .setDescription(
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
-      .setImage(AchariPaneerTikka),
+      .setImage(AchariPaneerTikka).build(),
     new DishModel()
       .setName("Methi Chicken Tikka Barnala ")
       .setIsVeg(false)
@@ -122,7 +119,7 @@ const menuItems = {
       .setDescription(
         "Barnala-style tender chicken Tikka flavoured with aromatic Methi."
       )
-      .setImage(MethiChickenTikka),
+      .setImage(MethiChickenTikka).build(),
   ],
   Soups: [
     new DishModel()
@@ -133,7 +130,7 @@ const menuItems = {
       .setDescription(
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
-      .setImage(ManchowSoup),
+      .setImage(ManchowSoup).build(),
 
     new DishModel()
       .setName("Sweet Corn Soup")
@@ -143,7 +140,7 @@ const menuItems = {
       .setDescription(
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
-      .setImage(SweetCornSoup),
+      .setImage(SweetCornSoup).build(),
   ],
 };
 export default menuItems;
