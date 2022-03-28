@@ -5,12 +5,14 @@ const initialState = menuItems["Recommended"];
 const activeMenuList = (state = initialState, action) => {
   switch (action.type) {
     case ACTIVE_MENU_UPDATE: {
-      console.log("Updated items......");
-      let updatedMenuList = [];
-      console.log("Rendering Items here", menuItems[action.payload]);
-      updatedMenuList = [...updatedMenuList, ...menuItems[action.payload]];
-      console.log("updated listr here:", updatedMenuList);
-      return updatedMenuList;
+      // let updatedMenuList = [];
+      // updatedMenuList = [...updatedMenuList, ...menuItems[action.payload]];
+      // return updatedMenuList;
+      const newState = produce(state, (draft) => {
+        draft = menuItems[action.payload];
+        return draft;
+      });
+      return newState;
     }
     case VEG_ONLY: {
       let updatedMenuList = [];
@@ -21,7 +23,14 @@ const activeMenuList = (state = initialState, action) => {
         );
         updatedMenuList = [...updatedMenuList, ...vegcategoryList];
       }
-      return updatedMenuList;
+      // return updatedMenuList;
+      // const newState =
+      //   (state,
+      //   (draft) => {
+      //     draft.filter((curr) => curr.isVeg === true);
+      //     return draft;
+      //   });
+      // return newState;
     }
     case APPLY_FILTER: {
       let updatedMenuList = [];

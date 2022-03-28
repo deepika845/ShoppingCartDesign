@@ -23,21 +23,24 @@
   color: #686b78;
   display: inline-block;
 }
-.header-bar-navigation{
+.header-bar-navigation {
   flex: 1;
   min-width: 0;
-  display: -ms-flexbox;
+
   display: flex;
-  -ms-flex-direction: row-reverse;
-  flex-direction: row-reverse;
+ flex-direction: row-reverse;
   height: 100%;
-  -ms-flex-align: center;
+  list-style: none;
+
   align-items: center;
-  list-style-type: none;
 }
-.header-bar-navigation--child{
+.header-bar-navigation--child :first-child{
+  margin-right: 0rem;
+}
+
+.header-bar-navigation--child {
   color: #3d4152;
-    font-size: 16px;
-    font-weight: 500;
-    margin-right: 0;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 3.8rem;
 }

@@ -64,14 +64,19 @@ const cartItems = function (state = initialState, action) {
     }
     case REMOVE_FROM_CART: {
       const { dishName } = action.payload;
-      const updatedCartItems = { ...state.bydishNames };
+      // const updatedCartItems = { ...state.bydishNames };
 
-      delete updatedCartItems[dishName];
-      return {
-        ...state,
-        dishNames: state.dishNames.filter((item) => item !== dishName),
-        updatedCartItems,
-      };
+      // delete updatedCartItems[dishName];
+      // return {
+      //   ...state,
+      //   dishNames: state.dishNames.filter((item) => item !== dishName),
+      //   updatedCartItems,
+      // };
+      const newState = produce(state, (draft) => {
+        draft.dishNames = draft.dishNames.filter((curr) => curr !== dishName);
+        delete draft.bydishNames[dishName];
+      });
+      return newState;
     }
     default:
       return state;

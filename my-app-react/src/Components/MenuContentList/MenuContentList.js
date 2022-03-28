@@ -112,6 +112,7 @@ function MenuContentList({
 }
 const mapStateToProps = (state) => {
   const { activeMenu, activeMenuList } = state;
+  console.log("In active menu List",activeMenuList)
   const { activeState } = activeMenu;
   const cartItems = getCartListByName(state);
 
