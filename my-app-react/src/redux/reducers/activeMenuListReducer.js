@@ -23,7 +23,7 @@ const activeMenuList = (state = initialState, action) => {
         );
         updatedMenuList = [...updatedMenuList, ...vegcategoryList];
       }
-      // return updatedMenuList;
+       return updatedMenuList;
       // const newState =
       //   (state,
       //   (draft) => {
