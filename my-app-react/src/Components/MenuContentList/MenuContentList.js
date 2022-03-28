@@ -95,9 +95,6 @@ function MenuContentList({
                 ) : (
                   <div
                     className="add-button"
-                    // onClick={() => {
-                    //   handleAddButton({ dishName, isVeg, price, qty: 1 });
-                    // }}
                     onClick={() => {
                       addToCart({ dishName, isVeg, price, qty: 1 });
                     }}
@@ -117,7 +114,7 @@ const mapStateToProps = (state) => {
   const { activeMenu, activeMenuList } = state;
   const { activeState } = activeMenu;
   const cartItems = getCartListByName(state);
-  //console.log(activeMenuItems);
+
   return { activeState, activeMenuList, cartItems };
 };
 export default connect(mapStateToProps, {

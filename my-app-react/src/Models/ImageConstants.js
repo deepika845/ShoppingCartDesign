@@ -8,9 +8,14 @@ export const NonVegPlatter = require("../Images/Dishes/Platters/NonVegPlatter.pn
 export const SweetCornSoup = require("../Images/Dishes/Soups/SweetCornSoup.png");
 export const ManchowSoup = require("../Images/Dishes/Soups/ManchowSoup.png");
 
-export const ChilliGarlicNoodles =
-  require("../Images/Dishes/Recommended/ChilliGarlicNoodles.png");
-export const MethiChickenTikka =
- require( "../Images/Dishes/Starters/MethiChickenTikka.png");
-export const AchariPaneerTikka =
-  require("../Images/Dishes/Starters/AchariPaneerTikka.png");
+export const ChilliGarlicNoodles = require("../Images/Dishes/Recommended/ChilliGarlicNoodles.png");
+export const MethiChickenTikka = require("../Images/Dishes/Starters/MethiChickenTikka.png");
+export const AchariPaneerTikka = require("../Images/Dishes/Starters/AchariPaneerTikka.png");
+export const NonVegTandooriPlatter = require("../Images/Dishes/Platters/NonVegTandooriPlatter.png");
+export const TandooriVegPlatter = require("../Images/Dishes/Platters/TandooriVegPlatter.png");
+export const PaneerTandooriGrilledSandwich = require("../Images/Dishes/Sandwiches/PaneerTandooriGrilledSandwich.png");
+export const GrilledSandwichwithCheese = require("../Images/Dishes/Sandwiches/GrilledSandwichwithCheese.png");
+export const FieryChicken = require("../Images/Dishes/Burger/FieryChicken.png");
+export const CheeseMeltDownBurger = require("../Images/Dishes/Burger/CheeseMeltDownBurger.png");
+export const ChickenSchezwanSteamMomos = require("../Images/Dishes/Momos/ChickenSchezwanSteamMomos.png");
+export const CornCheeseSteamMomos= require("../Images/Dishes/Momos/Corn&CheeseSteamMomos.png")

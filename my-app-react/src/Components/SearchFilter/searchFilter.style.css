@@ -4,6 +4,9 @@
   justify-content: center;
   height: 2.5rem;
   margin: -1rem;
+  position: sticky;
+  top: 15rem;
+  z-index: 6;
 }
 .search_for_dishes {
   width: 15rem;
@@ -36,7 +39,6 @@
   height: 4rem;
   padding: 1rem;
 }
-.label-style{
-    
-    color: #282c3f
+.label-style {
+  color: #282c3f;
 }

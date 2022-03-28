@@ -12,6 +12,13 @@ const Header = () => {
           Block N Shahdara, Delhi, 110032, India
         </span>
       </div>
+      <ul className="header-bar-navigation">
+        <li className="header-bar-navigation--child">Search</li>
+        <li className="header-bar-navigation--child">Offer</li>
+        <li className="header-bar-navigation--child">Help</li>
+        <li className="header-bar-navigation--child">Profile</li>
+        <li className="header-bar-navigation--child">Cart</li>
+      </ul>
     </div>
   );
 };

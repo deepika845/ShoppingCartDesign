@@ -4,11 +4,6 @@ import { changeActiveMenu, changeActiveMenuList } from "../../redux/actions";
 import { connect } from "react-redux";
 import { getActiveMenu } from "../../redux/selectors.js";
 function MenuList({ activeState, changeActiveMenu, changeActiveMenuList }) {
-  // const selectTheMenuItem = (event) => {
-  //   console.log(event.target.textContent);
-  //   props.onSelect(event.target.textContent);
-  // };
-
   return (
     <ul className="menu-list">
       {menuListModel.map((item, index) => (

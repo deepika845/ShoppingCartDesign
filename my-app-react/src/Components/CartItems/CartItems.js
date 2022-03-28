@@ -1,7 +1,7 @@
 import "./cartItems.style.css";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
 import { connect } from "react-redux";
-import { getCartListByName, getCartItemsNameList } from "../../redux/selectors";
+import { getCartListByName } from "../../redux/selectors";
 import {
   increaseToCart,
   decreaseToCart,
@@ -13,13 +13,6 @@ function CartItems({
   decreaseToCart,
   removeFromCart,
 }) {
-  console.log("Re render :", cartItems.length);
-  /* function increaseTheCount(dishName) {
-    props.increaseInCart(dishName);
-  }
-  function decreaseTheCount(dishName) {
-    props.decreaseInCart(dishName);
-  }*/
   let totalqty = 0;
   let totalAmount = 0;
   function totalItems() {
@@ -32,9 +25,32 @@ function CartItems({
       totalAmount += cartItems[i].qty * cartItems[i].price;
     }
   }
-  /*function handleCheckout(event) {
-    props.addToLocalStorage();
-  }*/
+  function handlePromise() {
+    return new Promise(function (resolve, reject) {
+      const userdata = fetch("https://api.github.com/users").then(
+        (response) => {
+          if (response.status === 200) {
+            resolve();
+          } else {
+            reject("Error found");
+          }
+        }
+      );
+    });
+  }
+  function handleFakeAPI(e) {
+    handlePromise().then(
+      function () {
+        alert("Success");
+        localStorage.setItem("cartList", JSON.stringify(cartItems));
+        console.log(JSON.parse(localStorage.getItem("cartList")));
+      },
+      function (param) {
+        console.log(param);
+      }
+    );
+  }
+
   totalItems();
   totalPrice();
   return (
@@ -57,9 +73,6 @@ function CartItems({
               <div className="selected-item-quantity">
                 <div
                   className="add-remove-1"
-                  /* onClick={() => {
-                    increaseTheCount(dishName);
-                  }}*/
                   onClick={() => {
                     increaseToCart({ dishName });
                   }}
@@ -69,9 +82,6 @@ function CartItems({
                 <div className="add-remove-1">{qty}</div>
                 <div
                   className="add-remove-1"
-                  /*onClick={() => {
-                    decreaseTheCount(dishName);
-                  }}*/
                   onClick={() => {
                     if (qty === 1) {
                       removeFromCart({ dishName });
@@ -98,7 +108,7 @@ function CartItems({
       ) : (
         ``
       )}
-      <button className="checkout-button" /* onClick={handleCheckout}*/>
+      <button className="checkout-button" onClick={handleFakeAPI}>
         Checkout
       </button>
     </div>

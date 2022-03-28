@@ -1,19 +1,26 @@
 import "./searchFilter.style.css";
 import { connect } from "react-redux";
 import { FaSearch } from "react-icons/fa";
-import { setVegOnlyFilter, changeActiveMenuList,setSearchFilter } from "../../redux/actions";
+import {
+  setVegOnlyFilter,
+  changeActiveMenuList,
+  setSearchFilter,
+} from "../../redux/actions";
 
-function SearchFilter({ activeState, changeActiveMenuList, setVegOnlyFilter,setSearchFilter }) {
+function SearchFilter({
+  activeState,
+  changeActiveMenuList,
+  setVegOnlyFilter,
+  setSearchFilter,
+}) {
   function handleSearch(event) {
-      setSearchFilter(event.target.value)
+    setSearchFilter(event.target.value);
   }
   function handleFilter(event) {
     if (event.target.checked) {
       setVegOnlyFilter();
     } else {
-      // console.log("ix:"+store.activeMenu)
-     
-      changeActiveMenuList(activeState)
+      changeActiveMenuList(activeState);
     }
   }
   return (
@@ -24,7 +31,7 @@ function SearchFilter({ activeState, changeActiveMenuList, setVegOnlyFilter,setS
           className="search_for_dishes_input"
           type="text"
           placeholder="Search for dishes..."
-         onChange={handleSearch}
+          onChange={handleSearch}
         />
       </div>
       <div className="search_with_veg_only">
@@ -44,6 +51,8 @@ const mapStateToProps = (state) => {
   const { activeState } = activeMenu;
   return { activeState };
 };
-export default connect(mapStateToProps, { changeActiveMenuList, setVegOnlyFilter ,setSearchFilter})(
-  SearchFilter
-);
+export default connect(mapStateToProps, {
+  changeActiveMenuList,
+  setVegOnlyFilter,
+  setSearchFilter,
+})(SearchFilter);

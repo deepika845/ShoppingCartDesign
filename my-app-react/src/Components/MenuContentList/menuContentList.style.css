@@ -63,6 +63,7 @@
   text-align: center;
   width: 6rem;
   z-index: 1;
+  margin-left: 0.5rem;
   color: #60b246;
   border: 0.0625rem solid #d4d5d9;
   cursor: pointer;

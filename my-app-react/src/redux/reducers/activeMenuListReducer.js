@@ -1,6 +1,6 @@
 import menuItems from "../../Models/dishModel";
 import { ACTIVE_MENU_UPDATE, VEG_ONLY, APPLY_FILTER } from "../actionTypes";
-//import { VEG_ONLY } from "../actionTypes";
+import produce from "immer";
 const initialState = menuItems["Recommended"];
 const activeMenuList = (state = initialState, action) => {
   switch (action.type) {
@@ -28,7 +28,7 @@ const activeMenuList = (state = initialState, action) => {
       for (let dishes in menuItems) {
         const categoryList = menuItems[dishes];
         const searchCategoryList = categoryList.filter((curr) =>
-          curr.dishName.includes(action.payload)
+          curr.dishName.toLowerCase().includes(action.payload)
         );
         updatedMenuList = [...updatedMenuList, ...searchCategoryList];
       }

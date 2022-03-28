@@ -1,9 +1,10 @@
 .menu-list {
   list-style: none;
- flex: 0.8 0 0;
+  flex: 0.8 0 0;
+  margin: 2rem;
 }
 .dish-item {
-  line-height: 1.5rem;
+  line-height: 1.7rem;
 }
 .menu-link {
   cursor: pointer;
