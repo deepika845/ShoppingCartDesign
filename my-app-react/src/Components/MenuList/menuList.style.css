@@ -1,11 +1,14 @@
 .menu-list {
   list-style: none;
-  flex: 0.8 0 0;
-  margin: 2rem;
+  flex: 0.8 0;
+  /* margin: 2rem; */
+  padding-right: 2rem;
 }
 .dish-item {
   line-height: 1.7rem;
+  text-align: end;
 }
+
 .menu-link {
   cursor: pointer;
 }

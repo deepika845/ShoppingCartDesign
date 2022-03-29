@@ -1,18 +1,17 @@
 .content-List-heading {
   font-weight: 600;
+  margin-bottom: 0rem;
 }
 .num-items {
   color: #686b78;
   font-weight: 500;
 }
 .menu-content-list {
- 
-  flex: 2 0 0;
+  flex-grow: 1;
+  width: 23rem;
+  padding: 0 0 0 4.7rem;
+  margin: 0rem;
 }
-.menuHeading {
-  margin-bottom: 2rem;
-}
-
 
 .add-button:hover {
   box-shadow: 0 0 20px 0px rgb(0 0 0 / 50%);
@@ -68,7 +67,7 @@
   border: 0.0625rem solid #d4d5d9;
   cursor: pointer;
 }
-.product-list{
+.product-list {
   padding-left: 0rem;
 }
 .selected-item-quantity {

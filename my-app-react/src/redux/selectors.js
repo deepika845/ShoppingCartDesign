@@ -6,7 +6,6 @@ export const getActiveMenuByFilter = (activeMenu) => {
 
 export const getActiveMenu = (store) => store.activeMenu;
 
-
 export const getCartItems = (store) => {
   const { cartItems } = store;
   console.log("finally in", cartItems);
@@ -20,7 +19,7 @@ export const getCartItemByName = (store, dishName) => {
     ? { ...getCartItems(store).bydishNames[dishName], dishName }
     : {};
   console.log("from here to", getCartItems(store));
-  //console.log("In cart by Name",res);
+
   return res;
 };
 export const getCartListByName = (store) =>
