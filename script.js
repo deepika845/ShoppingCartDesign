@@ -35,10 +35,7 @@ import menuList from "./Models/MenuListModel.js";
         return state;
       case actions.search_in_bar:
         let currSearchlist = [];
-        console.log("ENtered");
 
-        console.log(menuItems);
-        console.log(menuList);
         for (let i = 0; i < menuList.length; i++) {
           const searchInMenu =
             menuItems[menuList[i]] &&
@@ -54,8 +51,6 @@ import menuList from "./Models/MenuListModel.js";
       case actions.set_veg_filter:
         let currVegList = [];
 
-        console.log("In veg filter", menuItems);
-        console.log(menuList);
         for (let i = 0; i < menuList.length; i++) {
           const vegInMenu =
             menuItems[menuList[i]] &&
@@ -87,13 +82,12 @@ import menuList from "./Models/MenuListModel.js";
   }
 
   function getIndexInMenu(target, contentList) {
-    console.log(contentList.children);
     for (let i = 0; i < contentList.children.length; i++) {
       if (contentList.children[i] === target) {
         return i;
       }
     }
-    return 0;
+    return -1;
   }
   function changeActiveMenu(e) {
     const item = e.target;
@@ -107,23 +101,16 @@ import menuList from "./Models/MenuListModel.js";
     });
     state.activeMenu = updatedState.activeMenu;
     state.activeMenuList = updatedState.activeMenuList;
-    console.log("Last cart Items", state.cart);
 
     render();
   }
   function changeCartList(e) {
     if (e.target.classList[0] === "add-button") {
       const targetItem = e.target.parentElement.parentElement;
-      console.log("there" + targetItem);
+
       const contentList = document.querySelector(".product-list");
 
-      /*<div class="selected-item-quantity">
-            <div class="add-remove-1">+</div>
-            <div class="add-remove-1">${qty}</div>
-            <div class="add-remove-1">-</div> */
-
       const index = getIndexInMenu(targetItem, contentList);
-      console.log(index);
 
       const { isVeg, dishName, price } = state.activeMenuList[index];
       const updatedState = changeState(state, "add_to_cart", {
@@ -143,23 +130,17 @@ import menuList from "./Models/MenuListModel.js";
       const targetItem = e.target.parentNode.parentNode.parentNode;
       const contentList = document.querySelector(".product-list");
 
-      /*<div class="selected-item-quantity">
-            <div class="add-remove-1">+</div>
-            <div class="add-remove-1">${qty}</div>
-            <div class="add-remove-1">-</div> */
-
       const index = getIndexInMenu(targetItem, contentList);
-      console.log(index + "hikee");
 
       const { isVeg, dishName, price } = state.activeMenuList[index];
 
-      for (let i = 0; i < state.cart.length; i++) {
-        if (state.cart[i].dishName === dishName) {
-          console.log(i + "hisss");
-          const updatedState = changeState(state, "increase_in_cart", i);
-          state = updatedState;
+      const changeindex = state.cart.reduce((acc, curr, currIndex) => {
+        if (curr.dishName === dishName) {
+          return currIndex;
         }
-      }
+      }, -1);
+      const updatedState = changeState(state, "increase_in_cart", changeindex);
+      state = updatedState;
     } else {
       const cartItem = e.target.parentNode.parentNode;
       const cartList = document.querySelector(".selected-item");
@@ -175,21 +156,17 @@ import menuList from "./Models/MenuListModel.js";
       const targetItem = e.target.parentNode.parentNode.parentNode;
       const contentList = document.querySelector(".product-list");
 
-      /*<div class="selected-item-quantity">
-            <div class="add-remove-1">+</div>
-            <div class="add-remove-1">${qty}</div>
-            <div class="add-remove-1">-</div> */
-
       const index = getIndexInMenu(targetItem, contentList);
 
       const { isVeg, dishName, price } = state.activeMenuList[index];
 
-      for (let i = 0; i < state.cart.length; i++) {
-        if (state.cart[i].dishName === dishName) {
-          const updatedState = changeState(state, "decrease_in_cart", i);
-          state = updatedState;
+      const changeindex = state.cart.reduce((acc, curr, currIndex) => {
+        if (curr.dishName === dishName) {
+          return currIndex;
         }
-      }
+      }, -1);
+      const updatedState = changeState(state, "decrease_in_cart", changeindex);
+      state = updatedState;
     } else {
       const cartItem = e.target.parentNode.parentNode;
       const cartList = document.querySelector(".selected-item");
@@ -236,11 +213,11 @@ import menuList from "./Models/MenuListModel.js";
   function handleFakeAPI(e) {
     handlePromise().then(
       function () {
+        alert("Success...");
         localStorage.setItem("cartList", JSON.stringify(state.cart));
-        console.log(JSON.parse(localStorage.getItem("cartList")));
       },
       function (param) {
-        console.log(param);
+        alert("Error found");
       }
     );
   }
@@ -272,17 +249,14 @@ import menuList from "./Models/MenuListModel.js";
     cartList.innerHTML = "";
   }
   function renderCartItemCount() {
-    let qty = 0;
-    for (let i = 0; i < state.cart.length; i++) {
-      qty += state.cart[i].qty;
-    }
+    const qty = state.cart.reduce((acc, curr) => acc + curr.qty, 0);
     document.querySelector(".item-selected--count").innerHTML = `${qty} ITEMS`;
   }
   function renderTotalAmount() {
-    let totalAmount = 0;
-    for (let i = 0; i < state.cart.length; i++) {
-      totalAmount += state.cart[i].qty * state.cart[i].price;
-    }
+    const totalAmount = state.cart.reduce(
+      (acc, curr) => acc + curr.qty * curr.price,
+      0
+    );
     const totalCharge = document.querySelector(".total-charge");
     totalCharge.innerHTML =
       totalAmount == 0
@@ -318,13 +292,12 @@ import menuList from "./Models/MenuListModel.js";
     } ITEMS`;
   }
   function renderMenuItems(item) {
-    let qty;
-    for (let i = 0; i < state.cart.length; i++) {
-      if (item.dishName === state.cart[i].dishName) {
-        qty = state.cart[i].qty;
-        break;
+    const qty = state.cart.reduce((acc, curr) => {
+      if (curr.dishName === item.dishName) {
+        acc = curr.qty;
       }
-    }
+      return acc;
+    }, -1);
 
     const contentList = document.querySelector(".product-list");
     const { dishName, isVeg, isBestSeller, price, desc, image } = item;
@@ -359,7 +332,7 @@ import menuList from "./Models/MenuListModel.js";
                         alt="garlic-noodles"
                       />
                      ${
-                       qty
+                       qty !== -1
                          ? `<div class="selected-item-quantity">
                            <div class="in-menu--plus add-remove-1 plus">+</div>
                            <div class="in-menu add-remove-1">${qty}</div>

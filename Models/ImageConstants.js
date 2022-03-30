@@ -14,4 +14,4 @@ export const MethiChickenTikka =
   "./Images/Dishes/Starters/MethiChickenTikka.png";
 export const AchariPaneerTikka =
   "./Images/Dishes/Starters/AchariPaneerTikka.png";
-//export FoodOffer, HeaderLogo, VegLogo, MixedPlatter, VegPlatter, ChilliGarlicNoodles, AchariPaneerTikka, PaneerMalaiTikka };
+export const PaneerMalaiTikka = "./Images/Dishes/Starters/PaneerMalaiTikka.png";
