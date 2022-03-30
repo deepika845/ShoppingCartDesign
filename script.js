@@ -9,7 +9,6 @@ import menuList from "./Models/MenuListModel.js";
   function changeState(state, action, payload) {
     switch (action) {
       case actions.change_active_menu:
-        //console.log("Entered");
         const { ind, menuitems } = payload;
         state.activeMenu = ind;
         state.activeMenuList = menuitems;
@@ -21,9 +20,9 @@ import menuList from "./Models/MenuListModel.js";
   }
   function getIndex(item) {
     const sideBarList = document.querySelector(".category_side-bar");
-    //console.log(sideBarList);
+
     const len = sideBarList.children.length;
-    //console.log(len);
+
     for (let i = 0; i < len; i++) {
       if (sideBarList.children[i] === item) {
         return i;
@@ -32,12 +31,10 @@ import menuList from "./Models/MenuListModel.js";
     return 0;
   }
   function changeActiveMenu(e) {
-    //  console.log("hey");
     const item = e.target;
     console.log(e.target);
     const ind = getIndex(item);
-    //console.log(ind);
-    //console.log(menuList[ind]);
+
     const menuitems = menuItems[menuList[ind]];
     const updatedState = changeState(state, "change_active_menu", {
       ind,
@@ -49,8 +46,6 @@ import menuList from "./Models/MenuListModel.js";
     render();
   }
   function init() {
-    //console.log("Hello");
-
     const sidebarList = document.querySelector(".category_side-bar");
     sidebarList.addEventListener("click", changeActiveMenu);
     state.activeMenu = 0;
@@ -125,7 +120,6 @@ import menuList from "./Models/MenuListModel.js";
     contentList.appendChild(contentListItem);
   }
   function render() {
-    //console.log("Hey");
     clearList();
     renderSideBar();
     renderMenuHeading();

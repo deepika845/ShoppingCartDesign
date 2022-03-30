@@ -9,4 +9,3 @@ export const ChilliGarlicNoodles =
 export const AchariPaneerTikka =
   "./Images/Dishes/Starters/AchariPaneerTikka.png";
 export const PaneerMalaiTikka = "./Images/Dishes/Starters/PaneerMalaiTikka.png";
-//export FoodOffer, HeaderLogo, VegLogo, MixedPlatter, VegPlatter, ChilliGarlicNoodles, AchariPaneerTikka, PaneerMalaiTikka };
