@@ -40,10 +40,13 @@ import menuList from "./Models/MenuListModel.js";
         console.log(menuItems);
         console.log(menuList);
         for (let i = 0; i < menuList.length; i++) {
-          const searchInMenu = menuItems[menuList[i]].filter((curr) =>
-            curr.dishName.toLowerCase().includes(payload.keyword)
-          );
-          currSearchlist = [...currSearchlist, ...searchInMenu];
+          const searchInMenu =
+            menuItems[menuList[i]] &&
+            menuItems[menuList[i]].filter((curr) =>
+              curr.dishName.toLowerCase().includes(payload.keyword)
+            );
+          if (searchInMenu)
+            currSearchlist = [...currSearchlist, ...searchInMenu];
         }
 
         state.activeMenuList = currSearchlist;
@@ -51,13 +54,14 @@ import menuList from "./Models/MenuListModel.js";
       case actions.set_veg_filter:
         let currVegList = [];
 
-        console.log(menuItems);
+        console.log("In veg filter", menuItems);
         console.log(menuList);
         for (let i = 0; i < menuList.length; i++) {
-          const vegInMenu = menuItems[menuList[i]].filter(
-            (curr) => curr.isVeg === true
-          );
-          currVegList = [...currVegList, ...vegInMenu];
+          const vegInMenu =
+            menuItems[menuList[i]] &&
+            menuItems[menuList[i]].filter((curr) => curr.isVeg === true);
+
+          if (vegInMenu) currVegList = [...currVegList, ...vegInMenu];
         }
         state.activeMenuList = currVegList;
         return state;
@@ -103,6 +107,7 @@ import menuList from "./Models/MenuListModel.js";
     });
     state.activeMenu = updatedState.activeMenu;
     state.activeMenuList = updatedState.activeMenuList;
+    console.log("Last cart Items", state.cart);
 
     render();
   }
@@ -307,7 +312,9 @@ import menuList from "./Models/MenuListModel.js";
     const numItems = document.querySelector(".num-item");
     menuHeadline.innerHTML = `${menuList[state.activeMenu]}`;
     numItems.innerHTML = `${
-      menuItems[menuList[state.activeMenu]].length
+      menuItems[menuList[state.activeMenu]] == null
+        ? 0
+        : menuItems[menuList[state.activeMenu]].length
     } ITEMS`;
   }
   function renderMenuItems(item) {
@@ -391,10 +398,11 @@ import menuList from "./Models/MenuListModel.js";
     renderSideBar();
     renderMenuHeading();
     renderCartItemCount();
-    for (let i = 0; i < state.activeMenuList.length; i++) {
-      renderMenuItems(state.activeMenuList[i]);
+    if (state.activeMenuList) {
+      for (let i = 0; i < state.activeMenuList.length; i++) {
+        renderMenuItems(state.activeMenuList[i]);
+      }
     }
-
     const addButton = document.querySelectorAll(".add-button");
     for (let i = 0; i < addButton.length; i++) {
       addButton[i].addEventListener("click", changeCartList);
