@@ -1,21 +1,11 @@
 import "./menuList.style.css";
 import menuListModel from "../../Models/menuListModel";
-import { useEffect, useState } from "react";
 
 function MenuList(props) {
-
   const selectTheMenuItem = (event) => {
-    console.log(event.target.textContent)
+    console.log(event.target.textContent);
     props.onSelect(event.target.textContent);
-    
   };
-  // const [activeState, setActiveState] = useState('Recommended');
-  // function selectTheMenuItem(index) {
-  //   setActiveState(index);
-  // }
-  // useEffect(() => {
-  //   props.onSelect(activeState);
-  // },[activeState])
 
   return (
     <ul className="menu-list">

@@ -20,112 +20,93 @@ const App = () => {
   function selectedHandler(currItem) {
     setActiveMenu(currItem);
     let updatedMenuItems = [];
-    updatedMenuItems = [...updatedMenuItems, ...menuItems[currItem]]
-  
+    updatedMenuItems = [...updatedMenuItems, ...menuItems[currItem]];
     setActiveMenuItem(updatedMenuItems);
   }
   function increaseInCart(myname) {
-  
     let updatedCartItems;
-   
-    for (let i = 0; i < currCartItems.length; i++) {
-      if (currCartItems[i].dishName === myname) {
+
+    currCartItems.find((currItem, currIndex) => {
+      if (currItem.dishName === myname) {
         updatedCartItems = [...currCartItems];
-        updatedCartItems[i].qty += 1;
-       
-       
-        break;
+        updatedCartItems[currIndex].qty += 1;
+      } else {
       }
-    }
+    });
     setCartItems(updatedCartItems);
   }
   function decreaseInCart(myname) {
-    console.log("increase in cart", myname);
     let updatedCartItems;
-    
-    for (let i = 0; i < currCartItems.length; i++) {
-      if (currCartItems[i].dishName === myname) {
+
+    currCartItems.find((currItem, currIndex) => {
+      if (currItem.dishName === myname) {
         updatedCartItems = [...currCartItems];
-        updatedCartItems[i].qty -= 1;
-        if (updatedCartItems[i].qty === 0) {
+        updatedCartItems[currIndex].qty -= 1;
+        if (updatedCartItems[currIndex].qty === 0) {
           updatedCartItems = updatedCartItems.filter((curr) => {
             return curr.dishName !== myname;
           });
         }
-        
-       
-        break;
       }
-    }
+    });
     setCartItems(updatedCartItems);
   }
   function addToCart(newCartItem) {
     const updatedCartItems = [...currCartItems, newCartItem];
-  
+
     setCartItems(updatedCartItems);
   }
   function onSearchDish(keyword) {
-    
     if (keyword === "") {
       setActiveMenu(activeMenu);
     }
     let updatedMenuItems = [];
-    for (let i = 0; i < menuList.length; i++) {
-      const searchInMenu = menuItems[menuList[i]].filter((curr) =>
+    menuList.forEach((currList) => {
+      const searchInMenu = menuItems[currList].filter((curr) =>
         curr.dishName.toLowerCase().includes(keyword.toLowerCase())
       );
       updatedMenuItems = [...updatedMenuItems, ...searchInMenu];
-    }
+    });
     setActiveMenuItem(updatedMenuItems);
   }
   function onFilter(isChecked) {
     let updatedMenuItems = [];
     if (isChecked) {
-      for (let i = 0; i < menuList.length; i++) {
-        const vegItems = menuItems[menuList[i]].filter((curr) => {
-          return curr.isVeg === true;
-        });
-        updatedMenuItems = [...updatedMenuItems, ...vegItems];
-      }
-    }
-    else {
+      menuList.forEach((curr) => {
+        const allVegItem =
+          menuItems[curr] &&
+          menuItems[curr].filter((currItem) => currItem.isVeg === true);
+        if (allVegItem) updatedMenuItems = [...updatedMenuItems, ...allVegItem];
+      });
+    } else {
       updatedMenuItems = menuItems[activeMenu];
     }
-    
+    console.log(updatedMenuItems);
+
     setActiveMenuItem(updatedMenuItems);
-    
   }
-  function handlePromise() {
-    return new Promise(function (resolve, reject) {
-      const userdata = fetch("https://api.github.com/users").then(
-        (response) => {
-          if (response.status === 200) {
-            alert("Success...")
-            resolve();
-          } else {
-            reject("Error found");
-          }
-        }
-      );
+  function checkoutFakeAPI() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Checkout");
+      }, 2000);
     });
   }
-  function addToLocalStorage() {
-    handlePromise().then(
-      function () {
-        localStorage.setItem("cartList", JSON.stringify(currCartItems));
-      
-      },
-      function (param) {
-       alert('Error')
-      }
-    );
+  async function handleCheckout() {
+    checkoutFakeAPI()
+      .then((response) => {
+        localStorage.setItem("cart", JSON.stringify(currCartItems));
+        alert(response);
+      })
+      .catch((error) => {
+        alert(`Oops Something: ${error.message}`);
+      });
   }
 
   useEffect(() => {
     setActiveMenu(activeMenu);
     setActiveMenuItem(activeMenuItems);
     setCartItems(currCartItems);
-   
   }, [activeMenu, currCartItems, activeMenuItems]);
 
   return (
@@ -133,7 +114,7 @@ const App = () => {
       <Header />
       <BreadCrumb />
       <MiddleContainer>
-        <img src={FoodOffer} className="container-image"></img>
+        <img src={FoodOffer} className="container-image" alt="food-logo"></img>
 
         <DishOffer />
 
@@ -157,7 +138,7 @@ const App = () => {
           allCartItems={currCartItems}
           increaseInCart={increaseInCart}
           decreaseInCart={decreaseInCart}
-          addToLocalStorage={addToLocalStorage}
+          addToLocalStorage={handleCheckout}
         />
       </div>
     </React.StrictMode>

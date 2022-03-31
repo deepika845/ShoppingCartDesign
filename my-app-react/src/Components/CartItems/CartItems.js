@@ -1,7 +1,6 @@
 import "./cartItems.style.css";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
 function CartItems(props) {
-  console.log("Re render :", props.allCartItems.length);
   function increaseTheCount(dishName) {
     props.increaseInCart(dishName);
   }
@@ -11,13 +10,13 @@ function CartItems(props) {
   let totalqty = 0;
   let totalAmount = 0;
   function totalItems() {
-    for (let i = 0; i < props.allCartItems.length; i++){
+    for (let i = 0; i < props.allCartItems.length; i++) {
       totalqty += props.allCartItems[i].qty;
     }
   }
   function totalPrice() {
-    for (let i = 0; i < props.allCartItems.length; i++){
-      totalAmount += (props.allCartItems[i].qty * props.allCartItems[i].price);
+    for (let i = 0; i < props.allCartItems.length; i++) {
+      totalAmount += props.allCartItems[i].qty * props.allCartItems[i].price;
     }
   }
   function handleCheckout(event) {
@@ -29,11 +28,11 @@ function CartItems(props) {
     <div className="cart-Items">
       <h1 className="cart-heading">Cart Items</h1>
       <div className="cart-heading--secondary">Take a Casual Dinner</div>
-      <div className="selected-count">{ totalqty} ITEMS</div>
+      <div className="selected-count">{totalqty} ITEMS</div>
       <ul className="selected-items">
         {props.allCartItems.map((item) => {
           const { dishName, isVeg, price, qty } = item;
-          console.log("inside cart map", dishName, isVeg, price);
+
           return (
             <li className="selected-item--first" key={dishName}>
               <img
@@ -68,11 +67,17 @@ function CartItems(props) {
         })}
       </ul>
       <div>Extra Charges may apply</div>
-      {totalAmount!==0 ?  <div className="total-charge">
-            <div>Subtotal</div>
-            <div>₹ {totalAmount}</div>
-          </div>:``}
-      <button className="checkout-button" onClick={handleCheckout}>Checkout</button>
+      {totalAmount !== 0 ? (
+        <div className="total-charge">
+          <div>Subtotal</div>
+          <div>₹ {totalAmount}</div>
+        </div>
+      ) : (
+        ``
+      )}
+      <button className="checkout-button" onClick={handleCheckout}>
+        Checkout
+      </button>
     </div>
   );
 }
