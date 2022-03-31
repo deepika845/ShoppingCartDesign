@@ -21,19 +21,19 @@ const App = () => {
     setActiveMenu(currItem);
     let updatedMenuItems = [];
     updatedMenuItems = [...updatedMenuItems, ...menuItems[currItem]]
-    console.log("update after selection :",updatedMenuItems)
+  
     setActiveMenuItem(updatedMenuItems);
   }
   function increaseInCart(myname) {
-    console.log("increase in cart", myname);
+  
     let updatedCartItems;
-    console.log("before loop : ", currCartItems);
+   
     for (let i = 0; i < currCartItems.length; i++) {
       if (currCartItems[i].dishName === myname) {
         updatedCartItems = [...currCartItems];
         updatedCartItems[i].qty += 1;
-        console.log("updated one : ", updatedCartItems);
-        console.log("old one : ", currCartItems);
+       
+       
         break;
       }
     }
@@ -42,7 +42,7 @@ const App = () => {
   function decreaseInCart(myname) {
     console.log("increase in cart", myname);
     let updatedCartItems;
-    console.log("before loop : ", currCartItems);
+    
     for (let i = 0; i < currCartItems.length; i++) {
       if (currCartItems[i].dishName === myname) {
         updatedCartItems = [...currCartItems];
@@ -52,8 +52,8 @@ const App = () => {
             return curr.dishName !== myname;
           });
         }
-        console.log("updated one : ", updatedCartItems);
-        console.log("old one : ", currCartItems);
+        
+       
         break;
       }
     }
@@ -61,11 +61,11 @@ const App = () => {
   }
   function addToCart(newCartItem) {
     const updatedCartItems = [...currCartItems, newCartItem];
-    console.log("new cart items", updatedCartItems);
+  
     setCartItems(updatedCartItems);
   }
   function onSearchDish(keyword) {
-    console.log(keyword);
+    
     if (keyword === "") {
       setActiveMenu(activeMenu);
     }
@@ -91,7 +91,7 @@ const App = () => {
     else {
       updatedMenuItems = menuItems[activeMenu];
     }
-    console.log(updatedMenuItems);
+    
     setActiveMenuItem(updatedMenuItems);
     
   }
@@ -113,10 +113,10 @@ const App = () => {
     handlePromise().then(
       function () {
         localStorage.setItem("cartList", JSON.stringify(currCartItems));
-        console.log(JSON.parse(localStorage.getItem("cartList")));
+      
       },
       function (param) {
-        console.log(param);
+       alert('Error')
       }
     );
   }
@@ -125,8 +125,7 @@ const App = () => {
     setActiveMenu(activeMenu);
     setActiveMenuItem(activeMenuItems);
     setCartItems(currCartItems);
-    console.log("after veg filter", currCartItems);
-    console.log("my menu items", activeMenuItems);
+   
   }, [activeMenu, currCartItems, activeMenuItems]);
 
   return (
