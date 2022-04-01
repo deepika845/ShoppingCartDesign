@@ -17,7 +17,7 @@ const App = () => {
       <Header />
       <BreadCrumb />
       <MiddleContainer>
-        <img src={FoodOffer} className="container-image"></img>
+        <img src={FoodOffer} className="container-image" alt="food-offer"></img>
 
         <DishOffer />
 

@@ -19,6 +19,78 @@ function MenuContentList({
   increaseToCart,
   removeFromCart,
 }) {
+  function renderMenuItems({
+    dishName,
+    isVeg,
+    qty,
+    price,
+    desc,
+    image,
+    inCart,
+  }) {
+    return (
+      <li
+        className="product--desc--details category-separator"
+        key={`dishName:${dishName}`}
+      >
+        <div className="product-seller-item__Desc">
+          <div>
+            <img
+              className="veg-symbol"
+              src={isVeg ? VegLogo : NonVegLogo}
+              alt="veg-symbol"
+            />
+          </div>
+          <div className="product-items-details__name">
+            <h3>{dishName}</h3>
+          </div>
+          <div className="product-items-details__price">&#8377;{price}</div>
+          <div className="product-items-details">{desc}</div>
+        </div>
+        <div className="product-items-details__img">
+          <img
+            className="border-radius dish-items-width"
+            src={image}
+            alt="garlic-noodles"
+          />
+          {inCart ? (
+            <div className="selected-item-quantity">
+              <div
+                className="in-menu--plus add-remove-1"
+                onClick={() => {
+                  increaseToCart({ dishName });
+                }}
+              >
+                +
+              </div>
+              <div className="add-remove-1">{qty}</div>
+              <div
+                className="in-menu--minus add-remove-1"
+                onClick={() => {
+                  if (qty === 1) {
+                    removeFromCart({ dishName });
+                  } else {
+                    decreaseToCart({ dishName });
+                  }
+                }}
+              >
+                -
+              </div>
+            </div>
+          ) : (
+            <div
+              className="add-button"
+              onClick={() => {
+                addToCart({ dishName, isVeg, price, qty: 1 });
+              }}
+            >
+              ADD
+            </div>
+          )}
+        </div>
+      </li>
+    );
+  }
   return (
     <div className="menu-content-list">
       <div className="menuHeading">
@@ -30,81 +102,23 @@ function MenuContentList({
           const { dishName, isVeg, price, desc, image } = curr;
           let inCart = false;
           let qty = 0;
-          for (let i = 0; i < cartItems.length; i++) {
-            if (cartItems[i].dishName === dishName) {
+          cartItems.find((curr) => {
+            if (curr.dishName === dishName) {
               inCart = true;
-              qty = cartItems[i].qty;
+              qty = curr.qty;
+              return 0;
             }
-          }
+          });
 
-          return (
-            <li
-              className="product--desc--details category-separator"
-              key={`dishName:${dishName}`}
-            >
-              <div className="product-seller-item__Desc">
-                <div>
-                  <img
-                    className="veg-symbol"
-                    src={isVeg ? VegLogo : NonVegLogo}
-                    alt="veg-symbol"
-                  />
-                </div>
-                <div className="product-items-details__name">
-                  <h3>{dishName}</h3>
-                </div>
-                <div className="product-items-details__price">
-                  &#8377;{price}
-                </div>
-                <div className="product-items-details">{desc}</div>
-              </div>
-              <div className="product-items-details__img">
-                <img
-                  className="border-radius dish-items-width"
-                  src={image}
-                  alt="garlic-noodles"
-                />
-                {inCart ? (
-                  <div className="selected-item-quantity">
-                    <div
-                      className="in-menu--plus add-remove-1"
-                      /*onClick={() => increaseTheCount(dishName)}*/
-                      onClick={() => {
-                        console.log("in cart c");
-                        increaseToCart({ dishName });
-                      }}
-                    >
-                      +
-                    </div>
-                    <div className="add-remove-1">{qty}</div>
-                    <div
-                      className="in-menu--minus add-remove-1"
-                      // onClick={() => decreaseTheCount(dishName)}
-
-                      onClick={() => {
-                        if (qty === 1) {
-                          removeFromCart({ dishName });
-                        } else {
-                          decreaseToCart({ dishName });
-                        }
-                      }}
-                    >
-                      -
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    className="add-button"
-                    onClick={() => {
-                      addToCart({ dishName, isVeg, price, qty: 1 });
-                    }}
-                  >
-                    ADD
-                  </div>
-                )}
-              </div>
-            </li>
-          );
+          return renderMenuItems({
+            isVeg,
+            dishName,
+            price,
+            image,
+            desc,
+            inCart,
+            qty,
+          });
         })}
       </ul>
     </div>
@@ -112,7 +126,7 @@ function MenuContentList({
 }
 const mapStateToProps = (state) => {
   const { activeMenu, activeMenuList } = state;
-  console.log("In active menu List",activeMenuList)
+
   const { activeState } = activeMenu;
   const cartItems = getCartListByName(state);
 

@@ -18,4 +18,4 @@ export const GrilledSandwichwithCheese = require("../Images/Dishes/Sandwiches/Gr
 export const FieryChicken = require("../Images/Dishes/Burger/FieryChicken.png");
 export const CheeseMeltDownBurger = require("../Images/Dishes/Burger/CheeseMeltDownBurger.png");
 export const ChickenSchezwanSteamMomos = require("../Images/Dishes/Momos/ChickenSchezwanSteamMomos.png");
-export const CornCheeseSteamMomos= require("../Images/Dishes/Momos/Corn&CheeseSteamMomos.png")
+export const CornCheeseSteamMomos = require("../Images/Dishes/Momos/Corn&CheeseSteamMomos.png");

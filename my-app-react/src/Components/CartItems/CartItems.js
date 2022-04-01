@@ -1,3 +1,4 @@
+import React, { useMemo } from "react";
 import "./cartItems.style.css";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
 import { connect } from "react-redux";
@@ -14,91 +15,84 @@ function CartItems({
   removeFromCart,
 }) {
   let totalqty = 0;
+  totalqty = useMemo(() => {
+    const totalItems = cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+    return totalItems;
+  }, [cartItems]);
   let totalAmount = 0;
-  function totalItems() {
-    for (let i = 0; i < cartItems.length; i++) {
-      totalqty += cartItems[i].qty;
-    }
+
+  totalAmount = useMemo(() => {
+    const totalPrice = cartItems.reduce(
+      (acc, curr) => acc + curr.price * curr.qty,
+      0
+    );
+    return totalPrice;
+  }, [cartItems]);
+
+  function checkoutFakeAPI() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve("Checkout");
+      }, 2000);
+    });
   }
-  function totalPrice() {
-    for (let i = 0; i < cartItems.length; i++) {
-      totalAmount += cartItems[i].qty * cartItems[i].price;
-    }
+  async function handleCheckout() {
+    checkoutFakeAPI()
+      .then((response) => {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        alert(response);
+      })
+      .catch((error) => {
+        alert(`Oops Something: ${error.message}`);
+      });
   }
-  function handlePromise() {
-    return new Promise(function (resolve, reject) {
-      const userdata = fetch("https://api.github.com/users").then(
-        (response) => {
-          if (response.status === 200) {
-            resolve();
-          } else {
-            reject("Error found");
-          }
-        }
+  function createCartList() {
+    return cartItems.map((item) => {
+      const { dishName, isVeg, price, qty } = item;
+
+      return (
+        <li className="selected-item--first" key={`dishName${dishName}`}>
+          <img
+            className="veg-symbol"
+            src={isVeg ? VegLogo : NonVegLogo}
+            alt="veg-symbol"
+          />
+          <div className="selected-item-name">{dishName}</div>
+          <div className="selected-item-quantity">
+            <div
+              className="add-remove-1"
+              onClick={() => {
+                increaseToCart({ dishName });
+              }}
+            >
+              +
+            </div>
+            <div className="add-remove-1">{qty}</div>
+            <div
+              className="add-remove-1"
+              onClick={() => {
+                if (qty === 1) {
+                  removeFromCart({ dishName });
+                } else {
+                  decreaseToCart({ dishName });
+                }
+              }}
+            >
+              -
+            </div>
+          </div>
+
+          <div className="item-price">₹{price}</div>
+        </li>
       );
     });
   }
-  function handleFakeAPI(e) {
-    handlePromise().then(
-      function () {
-        alert("Success");
-        localStorage.setItem("cartList", JSON.stringify(cartItems));
-        console.log(JSON.parse(localStorage.getItem("cartList")));
-      },
-      function (param) {
-        console.log(param);
-      }
-    );
-  }
-
-  totalItems();
-  totalPrice();
   return (
     <div className="cart-Items">
       <h1 className="cart-heading">Cart Items</h1>
       <div className="cart-heading--secondary">Take a Casual Dinner</div>
       <div className="selected-count">{totalqty} ITEMS</div>
-      <ul className="selected-items">
-        {cartItems.map((item) => {
-          const { dishName, isVeg, price, qty } = item;
-          console.log("inside cart map", dishName, isVeg, price);
-          return (
-            <li className="selected-item--first" key={`dishName${dishName}`}>
-              <img
-                className="veg-symbol"
-                src={isVeg ? VegLogo : NonVegLogo}
-                alt="veg-symbol"
-              />
-              <div className="selected-item-name">{dishName}</div>
-              <div className="selected-item-quantity">
-                <div
-                  className="add-remove-1"
-                  onClick={() => {
-                    increaseToCart({ dishName });
-                  }}
-                >
-                  +
-                </div>
-                <div className="add-remove-1">{qty}</div>
-                <div
-                  className="add-remove-1"
-                  onClick={() => {
-                    if (qty === 1) {
-                      removeFromCart({ dishName });
-                    } else {
-                      decreaseToCart({ dishName });
-                    }
-                  }}
-                >
-                  -
-                </div>
-              </div>
-
-              <div className="item-price">₹{price}</div>
-            </li>
-          );
-        })}
-      </ul>
+      <ul className="selected-items">{createCartList()}</ul>
       <div>Extra Charges may apply</div>
       {totalAmount !== 0 ? (
         <div className="total-charge">
@@ -108,12 +102,13 @@ function CartItems({
       ) : (
         ``
       )}
-      <button className="checkout-button" onClick={handleFakeAPI}>
+      <button className="checkout-button" onClick={handleCheckout}>
         Checkout
       </button>
     </div>
   );
 }
+
 const mapStateToProps = (state) => {
   const cartItems = getCartListByName(state);
   return { cartItems };
