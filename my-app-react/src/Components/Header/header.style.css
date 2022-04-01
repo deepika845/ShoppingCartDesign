@@ -23,3 +23,24 @@
   color: #686b78;
   display: inline-block;
 }
+.header-bar-navigation {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+ flex-direction: row-reverse;
+  height: 100%;
+  list-style: none;
+
+  align-items: center;
+}
+.header-bar-navigation--child :first-child{
+  margin-right: 0rem;
+}
+
+.header-bar-navigation--child {
+  color: #3d4152;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: 3.8rem;
+}
