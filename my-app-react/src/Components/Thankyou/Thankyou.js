@@ -3,19 +3,14 @@ import { withRouter } from "react-router-dom";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
 function Thankyou({ history }) {
   function cartList() {
-    console.log("in function ", localStorage.getItem("cart"));
     const cartItems = JSON.parse(localStorage.getItem("cart"));
 
-    console.log(cartItems);
-
     const cartItemsList = cartItems;
-    console.log("cart Items list", cartItemsList);
+
     return cartItemsList;
   }
   const cartItems = cartList();
   function cartItemsMap() {
-    console.log(cartItems);
-
     const returnedList = cartItems.map(({ isVeg, dishName, price, qty }) => {
       return (
         <li key={`dishName ${dishName}`} className="selected-cart-item">
