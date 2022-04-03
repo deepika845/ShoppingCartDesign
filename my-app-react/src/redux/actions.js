@@ -36,3 +36,4 @@ export const setSearchFilter = (keyword) => ({
   type: APPLY_FILTER,
   payload: keyword,
 });
+export const handleCheckout = () => ({ type: "CHECKOUT" });

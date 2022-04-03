@@ -4,6 +4,7 @@ import {
   INCREASE_TO_CART,
   DECREASE_TO_CART,
   REMOVE_FROM_CART,
+  CHECKOUT,
 } from "../actionTypes";
 
 const initialState = { dishNames: [], bydishNames: {} };
@@ -43,6 +44,41 @@ const cartItems = function (state = initialState, action) {
         delete draft.bydishNames[dishName];
       });
       return newState;
+    }
+    case CHECKOUT: {
+      console.log("In checkout ssss");
+      const checkoutList = localStorage.getItem("cart");
+      console.log("Cart here:", checkoutList);
+      console.log(
+        "After parsing",
+        JSON.stringify(Object.values(state.bydishNames))
+      );
+      if (checkoutList === null) {
+        console.log("Cart here:", checkoutList);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify(Object.values(state.bydishNames))
+        );
+      } else {
+        console.log("Cart here:", checkoutList);
+        const parsedList = JSON.parse(checkoutList);
+
+        console.log("parse during reducer");
+
+        Object.values(state.bydishNames).forEach((item) => {
+          const index = parsedList.findIndex(
+            (i) => i.dishName === item.dishName
+          );
+          if (index === -1) {
+            parsedList.push(item);
+          } else {
+            parsedList[index].qty += item.qty;
+          }
+        });
+        console.log("must be in parse list", parsedList);
+        localStorage.setItem("cart", JSON.stringify(parsedList));
+      }
+      return { dishNames: [], bydishNames: {} };
     }
     default:
       return state;

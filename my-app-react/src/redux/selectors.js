@@ -23,6 +23,7 @@ export const getCartItemByName = (store, dishName) => {
   return res;
 };
 export const getCartListByName = (store) =>
+  getCartItemsNameList(store) &&
   getCartItemsNameList(store).map((dishName) =>
     getCartItemByName(store, dishName)
   );
