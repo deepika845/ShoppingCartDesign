@@ -28,13 +28,13 @@
   min-width: 0;
 
   display: flex;
- flex-direction: row-reverse;
+  flex-direction: row-reverse;
   height: 100%;
   list-style: none;
 
   align-items: center;
 }
-.header-bar-navigation--child :first-child{
+.header-bar-navigation--child :first-child {
   margin-right: 0rem;
 }
 
@@ -43,4 +43,8 @@
   font-size: 16px;
   font-weight: 500;
   margin-right: 3.8rem;
+  cursor: pointer;
+}
+.header-bar-navigation--child :hover {
+  color: #fc8019;
 }

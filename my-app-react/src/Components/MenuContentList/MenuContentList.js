@@ -102,13 +102,14 @@ function MenuContentList({
           const { dishName, isVeg, price, desc, image } = curr;
           let inCart = false;
           let qty = 0;
-          cartItems.find((curr) => {
-            if (curr.dishName === dishName) {
-              inCart = true;
-              qty = curr.qty;
-              return 0;
-            }
-          });
+          cartItems &&
+            cartItems.find((curr) => {
+              if (curr.dishName === dishName) {
+                inCart = true;
+                qty = curr.qty;
+                return 0;
+              }
+            });
 
           return renderMenuItems({
             isVeg,

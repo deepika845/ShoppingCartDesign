@@ -1,34 +1,18 @@
-import "./App.css";
 import React from "react";
+import "./App.css";
 import Header from "./Components/Header/Header.js";
-import BreadCrumb from "./Components/BreadCrumbList/BreadCrumb.js";
-import DishOffer from "./Components//DishOffer/DishOffer.js";
-import MiddleContainer from "./Components/MiddleContainer/MiddleContainer";
-import FoodOffer from "./Images/Food_Offer.png";
-import SearchFilter from "./Components/SearchFilter/SearchFilter.js";
-import MenuList from "./Components/MenuList/MenuList.js";
-import MenuContentList from "./Components/MenuContentList/MenuContentList";
-import OfferPercent from "./Components/OfferPercent/OfferPercent";
-import CartItems from "./Components/CartItems/CartItems.js";
-
+import ContentSection from "./Components/ContentSection";
+import Thankyou from "./Components/Thankyou/Thankyou";
+import { Route, Switch } from "react-router-dom";
 const App = () => {
   return (
     <React.StrictMode>
       <Header />
-      <BreadCrumb />
-      <MiddleContainer>
-        <img src={FoodOffer} className="container-image" alt="food-offer"></img>
 
-        <DishOffer />
-
-        <OfferPercent />
-      </MiddleContainer>
-      <SearchFilter></SearchFilter>
-      <div className="test">
-        <MenuList />
-        <MenuContentList />
-        <CartItems />
-      </div>
+      <Switch>
+        <Route exact path="/" render={() => <ContentSection />}></Route>
+        <Route exact path="/thankyou" render={() => <Thankyou />}></Route>
+      </Switch>
     </React.StrictMode>
   );
 };

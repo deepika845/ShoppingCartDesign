@@ -1,0 +1,32 @@
+.veg-symbol {
+  height: 1.11rem;
+}
+ul {
+  list-style: none;
+}
+.order-note {
+  text-align: center;
+  color: green;
+  width: fit-content;
+  border: 2px solid darkgreen;
+  padding: 0 5rem;
+  background: antiquewhite;
+}
+.selected-cart-item {
+  display: flex;
+  border-bottom: 2px solid lightgray;
+  width: fit-content;
+  gap: 4rem;
+}
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 27rem;
+}
+.subtotal {
+  border: 2px solid green;
+  width: 27rem;
+  text-align: center;
+  background: antiquewhite;
+}

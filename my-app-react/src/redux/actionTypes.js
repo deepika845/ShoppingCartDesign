@@ -6,3 +6,4 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const ACTIVE_MENU_UPDATE = "ACTIVE_MENU_UPDATE";
 export const VEG_ONLY = "VEG_ONLY";
 export const APPLY_FILTER = "APPLY_FILTER";
+export const CHECKOUT = "CHECKOUT";

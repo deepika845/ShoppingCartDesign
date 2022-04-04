@@ -7,85 +7,78 @@ import {
   increaseToCart,
   decreaseToCart,
   removeFromCart,
+  handleCheckout,
 } from "../../redux/actions";
 function CartItems({
   cartItems,
   increaseToCart,
   decreaseToCart,
   removeFromCart,
+  handleCheckout,
+  history,
 }) {
   let totalqty = 0;
   totalqty = useMemo(() => {
-    const totalItems = cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+    const totalItems =
+      cartItems && cartItems.reduce((acc, curr) => acc + curr.qty, 0);
     return totalItems;
   }, [cartItems]);
   let totalAmount = 0;
 
   totalAmount = useMemo(() => {
-    const totalPrice = cartItems.reduce(
-      (acc, curr) => acc + curr.price * curr.qty,
-      0
-    );
+    const totalPrice =
+      cartItems &&
+      cartItems.reduce((acc, curr) => acc + curr.price * curr.qty, 0);
     return totalPrice;
   }, [cartItems]);
 
-  function checkoutFakeAPI() {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve("Checkout");
-      }, 2000);
-    });
-  }
-  async function handleCheckout() {
-    checkoutFakeAPI()
-      .then((response) => {
-        localStorage.setItem("cart", JSON.stringify(cartItems));
-        alert(response);
-      })
-      .catch((error) => {
-        alert(`Oops Something: ${error.message}`);
-      });
+  function handleCartCheckout() {
+    handleCheckout();
+    history.push("/thankyou");
   }
   function createCartList() {
-    return cartItems.map((item) => {
-      const { dishName, isVeg, price, qty } = item;
+    return (
+      cartItems &&
+      cartItems.map((item) => {
+        const { dishName, isVeg, price, qty } = item;
 
-      return (
-        <li className="selected-item--first" key={`dishName${dishName}`}>
-          <img
-            className="veg-symbol"
-            src={isVeg ? VegLogo : NonVegLogo}
-            alt="veg-symbol"
-          />
-          <div className="selected-item-name">{dishName}</div>
-          <div className="selected-item-quantity">
-            <div
-              className="add-remove-1"
-              onClick={() => {
-                increaseToCart({ dishName });
-              }}
-            >
-              +
+        return (
+          <li className="selected-item--first" key={`dishName${dishName}`}>
+            <img
+              className="veg-symbol"
+              src={isVeg ? VegLogo : NonVegLogo}
+              alt="veg-symbol"
+            />
+            <div className="selected-item-name">{dishName}</div>
+            <div className="selected-item-quantity">
+              <div
+                className="add-remove-1"
+                onClick={() => {
+                  increaseToCart({ dishName });
+                }}
+              >
+                +
+              </div>
+              <div className="add-remove-1">{qty}</div>
+              <div
+                className="add-remove-1"
+                onClick={() => {
+                  if (qty === 1) {
+                    removeFromCart({ dishName });
+                  } else {
+                    decreaseToCart({ dishName });
+                  }
+                }}
+              >
+                -
+              </div>
             </div>
-            <div className="add-remove-1">{qty}</div>
-            <div
-              className="add-remove-1"
-              onClick={() => {
-                if (qty === 1) {
-                  removeFromCart({ dishName });
-                } else {
-                  decreaseToCart({ dishName });
-                }
-              }}
-            >
-              -
-            </div>
-          </div>
 
-          <div className="item-price">₹{price}</div>
-        </li>
-      );
-    });
+            <div className="item-price">₹{price}</div>
+          </li>
+        );
+      })
+    );
   }
   return (
     <div className="cart-Items">
@@ -94,7 +87,7 @@ function CartItems({
       <div className="selected-count">{totalqty} ITEMS</div>
       <ul className="selected-items">{createCartList()}</ul>
       <div>Extra Charges may apply</div>
-      {totalAmount !== 0 ? (
+      {totalAmount !== 0 || Object.keys(cartItems).length !== 0 ? (
         <div className="total-charge">
           <div>Subtotal</div>
           <div>₹ {totalAmount}</div>
@@ -102,7 +95,12 @@ function CartItems({
       ) : (
         ``
       )}
-      <button className="checkout-button" onClick={handleCheckout}>
+      <button
+        className="checkout-button"
+        onClick={() => {
+          handleCartCheckout();
+        }}
+      >
         Checkout
       </button>
     </div>
@@ -117,4 +115,5 @@ export default connect(mapStateToProps, {
   increaseToCart,
   removeFromCart,
   decreaseToCart,
+  handleCheckout,
 })(CartItems);
