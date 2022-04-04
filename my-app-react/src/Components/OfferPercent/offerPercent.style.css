@@ -1,14 +1,16 @@
 .offer-percent {
   display: flex;
   flex-direction: column;
-  padding: 0.5rem;
-  height: 10rem;
+  padding: 1.5rem;
+  height: 11rem;
+  width: 21rem;
   border: 0.0625rem solid #bec0c8;
   position: relative;
 }
-.offer{
+.offer {
   position: absolute;
   margin: 0rem;
   top: -1rem;
+  left: 0;
   font-size: 1.5rem;
 }
