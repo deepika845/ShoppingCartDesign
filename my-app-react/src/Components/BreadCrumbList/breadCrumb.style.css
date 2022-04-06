@@ -1,0 +1,7 @@
+.breadCrumbList {
+  height: 1.875rem;
+  font-size: 0.625rem;
+  color: #4b4d55;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,102 @@
+.content-List-heading {
+  font-weight: 600;
+}
+.num-items {
+  color: #686b78;
+  font-weight: 500;
+}
+.menu-content-list {
+ 
+  flex: 2 0 0;
+}
+.menuHeading {
+  margin-bottom: 2rem;
+}
+
+
+.add-button:hover {
+  box-shadow: 0 0 20px 0px rgb(0 0 0 / 50%);
+}
+.faded-color {
+  color: rgba(40, 44, 63, 0.45);
+}
+.product--desc--details {
+  padding-bottom: 2.22rem;
+  display: flex;
+  justify-content: space-between;
+}
+.category-separator {
+  border-bottom: 0.12rem solid #d4d5d9;
+
+  margin: 1.25rem 0;
+}
+.product-seller-item__Desc {
+  display: flex;
+  flex-direction: column;
+}
+.veg-symbol {
+  height: 1.11rem;
+}
+.product-items-details__name {
+  font-size: 1.22rem;
+  font-weight: 500;
+  color: #3e4152;
+}
+.product-items-details__price {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #3e4152;
+}
+.product-items-details {
+  margin-top: 0.75rem;
+  line-height: 1.3;
+  color: rgba(40, 44, 63, 0.45);
+  font-size: 1rem;
+  font-weight: 400;
+}
+.product-items-details__img {
+  position: relative;
+  margin: 3rem;
+}
+.add-button {
+  position: absolute;
+  text-align: center;
+  width: 6rem;
+  z-index: 1;
+  color: #60b246;
+  border: 0.0625rem solid #d4d5d9;
+  cursor: pointer;
+}
+.product-list{
+  padding-left: 0rem;
+}
+.selected-item-quantity {
+  height: 1.875rem;
+  display: flex;
+  justify-content: space-around;
+  border: 0.0625rem solid #d4d5d9;
+  color: #60b246;
+  font-weight: 600;
+  width: 7rem;
+  line-height: 1.875rem;
+  text-align: center;
+  background-color: #fff;
+}
+.add-remove-1 {
+  cursor: pointer;
+  font-weight: 600;
+}
+.total-charge {
+  color: #3d4152;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+.border-radius {
+  border-radius: 6px;
+}
+.dish-items-width {
+  width: 7.37rem;
+}

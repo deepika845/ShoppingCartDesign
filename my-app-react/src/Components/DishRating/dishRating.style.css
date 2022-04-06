@@ -1,0 +1,14 @@
+.dishRating {
+  display: flex;
+  font-weight: 600;
+}
+span {
+  display: block;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+.border-right {
+  border-right: 1px solid hsla(0, 0%, 100%, 0.2);
+}
+.dishRating > .border-right:last-of-type {
+  border-right: none;
+}
