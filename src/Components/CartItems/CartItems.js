@@ -1,73 +1,93 @@
+import React, { useMemo } from "react";
 import "./cartItems.style.css";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
-function CartItems(props) {
-  function increaseTheCount(dishName) {
-    props.increaseInCart(dishName);
-  }
-  function decreaseTheCount(dishName) {
-    props.decreaseInCart(dishName);
-  }
+import { connect } from "react-redux";
+import { getCartListByName } from "../../redux/selectors";
+import {
+  increaseToCart,
+  decreaseToCart,
+  removeFromCart,
+  handleCheckout,
+} from "../../redux/actions";
+function CartItems({
+  cartItems,
+  increaseToCart,
+  decreaseToCart,
+  removeFromCart,
+  handleCheckout,
+  history,
+}) {
   let totalqty = 0;
+  totalqty = useMemo(() => {
+    const totalItems =
+      cartItems && cartItems.reduce((acc, curr) => acc + curr.qty, 0);
+    return totalItems;
+  }, [cartItems]);
   let totalAmount = 0;
-  function totalItems() {
-    for (let i = 0; i < props.allCartItems.length; i++) {
-      totalqty += props.allCartItems[i].qty;
-    }
+
+  totalAmount = useMemo(() => {
+    const totalPrice =
+      cartItems &&
+      cartItems.reduce((acc, curr) => acc + curr.price * curr.qty, 0);
+    return totalPrice;
+  }, [cartItems]);
+
+  function handleCartCheckout() {
+    handleCheckout();
+    history.push("/thankyou");
   }
-  function totalPrice() {
-    for (let i = 0; i < props.allCartItems.length; i++) {
-      totalAmount += props.allCartItems[i].qty * props.allCartItems[i].price;
-    }
+  function createCartList() {
+    return (
+      cartItems &&
+      cartItems.map((item) => {
+        const { dishName, isVeg, price, qty } = item;
+
+        return (
+          <li className="selected-item--first" key={`dishName${dishName}`}>
+            <img
+              className="veg-symbol"
+              src={isVeg ? VegLogo : NonVegLogo}
+              alt="veg-symbol"
+            />
+            <div className="selected-item-name">{dishName}</div>
+            <div className="selected-item-quantity">
+              <div
+                className="add-remove-1"
+                onClick={() => {
+                  increaseToCart({ dishName });
+                }}
+              >
+                +
+              </div>
+              <div className="add-remove-1">{qty}</div>
+              <div
+                className="add-remove-1"
+                onClick={() => {
+                  if (qty === 1) {
+                    removeFromCart({ dishName });
+                  } else {
+                    decreaseToCart({ dishName });
+                  }
+                }}
+              >
+                -
+              </div>
+            </div>
+
+            <div className="item-price">₹{price}</div>
+          </li>
+        );
+      })
+    );
   }
-  function handleCheckout(event) {
-    props.addToLocalStorage();
-  }
-  totalItems();
-  totalPrice();
   return (
     <div className="cart-Items">
       <h1 className="cart-heading">Cart Items</h1>
       <div className="cart-heading--secondary">Take a Casual Dinner</div>
       <div className="selected-count">{totalqty} ITEMS</div>
-      <ul className="selected-items">
-        {props.allCartItems.map((item) => {
-          const { dishName, isVeg, price, qty } = item;
-
-          return (
-            <li className="selected-item--first" key={dishName}>
-              <img
-                className="veg-symbol"
-                src={isVeg ? VegLogo : NonVegLogo}
-                alt="veg-symbol"
-              />
-              <div className="selected-item-name">{dishName}</div>
-              <div className="selected-item-quantity">
-                <div
-                  className="add-remove-1"
-                  onClick={() => {
-                    increaseTheCount(dishName);
-                  }}
-                >
-                  +
-                </div>
-                <div className="add-remove-1">{qty}</div>
-                <div
-                  className="add-remove-1"
-                  onClick={() => {
-                    decreaseTheCount(dishName);
-                  }}
-                >
-                  -
-                </div>
-              </div>
-
-              <div className="item-price">₹{price}</div>
-            </li>
-          );
-        })}
-      </ul>
+      <ul className="selected-items">{createCartList()}</ul>
       <div>Extra Charges may apply</div>
-      {totalAmount !== 0 ? (
+      {totalAmount !== 0 || Object.keys(cartItems).length !== 0 ? (
         <div className="total-charge">
           <div>Subtotal</div>
           <div>₹ {totalAmount}</div>
@@ -75,10 +95,25 @@ function CartItems(props) {
       ) : (
         ``
       )}
-      <button className="checkout-button" onClick={handleCheckout}>
+      <button
+        className="checkout-button"
+        onClick={() => {
+          handleCartCheckout();
+        }}
+      >
         Checkout
       </button>
     </div>
   );
 }
-export default CartItems;
+
+const mapStateToProps = (state) => {
+  const cartItems = getCartListByName(state);
+  return { cartItems };
+};
+export default connect(mapStateToProps, {
+  increaseToCart,
+  removeFromCart,
+  decreaseToCart,
+  handleCheckout,
+})(CartItems);

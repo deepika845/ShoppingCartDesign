@@ -6,4 +6,7 @@
   justify-content: center;
   align-items: center;
   gap: 6rem;
+  top: 0rem;
+  position: sticky;
+  z-index: 5;
 }
