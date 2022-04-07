@@ -3,6 +3,7 @@ import "./menuContentList.style.css";
 import { VegLogo } from "../../Models/ImageConstants";
 import { NonVegLogo } from "../../Models/ImageConstants";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
   addToCart,
   increaseToCart,
@@ -133,9 +134,10 @@ const mapStateToProps = (state) => {
 
   return { activeState, activeMenuList, cartItems };
 };
-export default connect(mapStateToProps, {
-  addToCart,
-  increaseToCart,
-  decreaseToCart,
-  removeFromCart,
-})(MenuContentList);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { addToCart, increaseToCart, decreaseToCart, removeFromCart },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MenuContentList);

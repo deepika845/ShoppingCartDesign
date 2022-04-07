@@ -6,6 +6,7 @@ import {
   changeActiveMenuList,
   setSearchFilter,
 } from "../../redux/actions";
+import { bindActionCreators } from "redux";
 
 function SearchFilter({
   activeState,
@@ -51,8 +52,14 @@ const mapStateToProps = (state) => {
   const { activeState } = activeMenu;
   return { activeState };
 };
-export default connect(mapStateToProps, {
-  changeActiveMenuList,
-  setVegOnlyFilter,
-  setSearchFilter,
-})(SearchFilter);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      changeActiveMenuList,
+      setVegOnlyFilter,
+      setSearchFilter,
+    },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SearchFilter);

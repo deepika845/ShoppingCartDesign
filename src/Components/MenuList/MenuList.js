@@ -3,6 +3,7 @@ import menuListModel from "../../Models/menuListModel";
 import { changeActiveMenu, changeActiveMenuList } from "../../redux/actions";
 import { connect } from "react-redux";
 import { getActiveMenu } from "../../redux/selectors.js";
+import { bindActionCreators } from "redux";
 function MenuList({ activeState, changeActiveMenu, changeActiveMenuList }) {
   function renderCategory(isActiveMenu, categoryName) {
     return (
@@ -30,8 +31,10 @@ const mapStateToProps = (state) => {
   const { activeState } = getActiveMenu(state);
   return { activeState };
 };
-
-export default connect(mapStateToProps, {
-  changeActiveMenu,
-  changeActiveMenuList,
-})(MenuList);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    { changeActiveMenu, changeActiveMenuList },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MenuList);

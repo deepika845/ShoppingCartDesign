@@ -9,6 +9,7 @@ import {
   removeFromCart,
   handleCheckout,
 } from "../../redux/actions";
+import { bindActionCreators } from "redux";
 function CartItems({
   cartItems,
   increaseToCart,
@@ -111,9 +112,15 @@ const mapStateToProps = (state) => {
   const cartItems = getCartListByName(state);
   return { cartItems };
 };
-export default connect(mapStateToProps, {
-  increaseToCart,
-  removeFromCart,
-  decreaseToCart,
-  handleCheckout,
-})(CartItems);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      increaseToCart,
+      removeFromCart,
+      decreaseToCart,
+      handleCheckout,
+    },
+    dispatch
+  );
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CartItems);
