@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import "./cartItems.style.css";
 import { VegLogo, NonVegLogo } from "../../Models/ImageConstants";
 import { connect } from "react-redux";
@@ -10,6 +10,7 @@ import {
   handleCheckout,
 } from "../../redux/actions";
 import { bindActionCreators } from "redux";
+import { ThemeContext } from "../../App";
 function CartItems({
   cartItems,
   increaseToCart,
@@ -18,6 +19,7 @@ function CartItems({
   handleCheckout,
   history,
 }) {
+  const lightBackground = useContext(ThemeContext);
   let totalqty = 0;
   totalqty = useMemo(() => {
     const totalItems =
@@ -97,7 +99,9 @@ function CartItems({
         ``
       )}
       <button
-        className="checkout-button"
+        className={`checkout-button ${
+          lightBackground ? `checkout-button--light` : `checkout-button--dark`
+        }`}
         onClick={() => {
           handleCartCheckout();
         }}

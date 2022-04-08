@@ -4,7 +4,7 @@ import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { GiShakingHands } from "react-icons/gi";
 import { MdLocalOffer } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
-const Header = () => {
+const Header = ({ changeColor }) => {
   return (
     <div className="header">
       <img type="link" src={Header_Logo} className="header-logo" />
@@ -15,6 +15,9 @@ const Header = () => {
         </span>
       </div>
       <ul className="header-bar-navigation">
+        <li className="header-bar-navigation--child">
+          <span onClick={changeColor}>Change Checkout Color</span>
+        </li>
         <li className="header-bar-navigation--child">
           <span>
             <FaSearch />
