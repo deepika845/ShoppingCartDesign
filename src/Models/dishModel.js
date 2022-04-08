@@ -14,7 +14,7 @@ import {
   CheeseMeltDownBurger,
   ChickenSchezwanSteamMomos,
   FieryChicken,
-  CornCheeseSteamMomos
+  CornCheeseSteamMomos,
 } from "./ImageConstants.js";
 function Dish(dishName, isVeg, isBestSeller, price, desc, image) {
   this.dishName = dishName;
@@ -79,6 +79,16 @@ const menuItems = {
         "Asian Chinese-style garlic noodles recipe includes noodles cooked with dry red chilies and red chili sauce for a vibrant, lightly spicy dish."
       )
       .setImage(ChilliGarlicNoodles)
+      .build(),
+    new DishModel()
+      .setName("Non Veg Tandoori Platters")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(230)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(NonVegTandooriPlatter)
       .build(),
   ],
   Platters: [
