@@ -8,7 +8,7 @@ export const getActiveMenu = (store) => store.activeMenu;
 
 export const getCartItems = (store) => {
   const { cartItems } = store;
-  console.log("finally in", cartItems);
+
   return cartItems;
 };
 export const getCartItemsNameList = (store) =>
