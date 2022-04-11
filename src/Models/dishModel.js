@@ -7,6 +7,14 @@ import {
   ChilliGarlicNoodles,
   MethiChickenTikka,
   AchariPaneerTikka,
+  TandooriVegPlatter,
+  NonVegTandooriPlatter,
+  PaneerTandooriGrilledSandwich,
+  GrilledSandwichwithCheese,
+  CheeseMeltDownBurger,
+  ChickenSchezwanSteamMomos,
+  FieryChicken,
+  CornCheeseSteamMomos,
 } from "./ImageConstants.js";
 function Dish(dishName, isVeg, isBestSeller, price, desc, image) {
   this.dishName = dishName;
@@ -72,6 +80,16 @@ const menuItems = {
       )
       .setImage(ChilliGarlicNoodles)
       .build(),
+    new DishModel()
+      .setName("Non Veg Tandoori Platters")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(230)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(NonVegTandooriPlatter)
+      .build(),
   ],
   Platters: [
     new DishModel()
@@ -103,6 +121,27 @@ const menuItems = {
         "An authentic non veg platter with 3 pieces of Barnala Mathi Chicken Tikka, 3 pieces of Dhaniya Chicken, 3 pieces of Tawa Chicken and 3 pieces of Chicken Kebab."
       )
       .setImage(NonVegPlatter)
+      .build(),
+
+    new DishModel()
+      .setName("Tandoori Veg Platter")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(199)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(TandooriVegPlatter)
+      .build(),
+    new DishModel()
+      .setName("Non Veg Tandoori Platters")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(230)
+      .setDescription(
+        "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
+      )
+      .setImage(NonVegTandooriPlatter)
       .build(),
   ],
   Starters: [
@@ -148,6 +187,75 @@ const menuItems = {
         "An authentic mixed platter with 3 pieces of Barnala Methi Chicken, 3 pieces of Chicken Kebab, 3 pieces of Hara Bhara and 3 pieces of Paneer Tikka."
       )
       .setImage(SweetCornSoup)
+      .build(),
+  ],
+  Sandwiches: [
+    new DishModel()
+      .setName("Paneer Tandoori Grilled Sandwich")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(238)
+      .setDescription(
+        "Cottage cheese tandoori sandwich grilled with white bread tasty and delectable, made to perfection, two pieces."
+      )
+      .setImage(PaneerTandooriGrilledSandwich)
+      .build(),
+
+    new DishModel()
+      .setName("Grilled Sandwich with Cheese")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(210)
+      .setDescription(
+        "Classic grilled sandwich with cheese, grilled to perfection, made to perfection, rich and flavourful, two pieces."
+      )
+      .setImage(GrilledSandwichwithCheese)
+      .build(),
+  ],
+  Burger: [
+    new DishModel()
+      .setName("Cheese Melt Down Burger")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(169)
+      .setDescription(
+        "Cheese oozing spicy veg patty, veggies and creamy sauce. An indulgent treat from our King's Collection!"
+      )
+      .setImage(CheeseMeltDownBurger)
+      .build(),
+
+    new DishModel()
+      .setName("Fiery Chicken")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(210)
+      .setDescription(
+        "Too Hot to Handle. Our Spicy & Crunchy Chicken Patty topped with crispy lettuce, juicy tomatoes(seasonal) and creamy sauce with our unique corn dust buns. An indulgent treat from our King's Collection!"
+      )
+      .setImage(FieryChicken)
+      .build(),
+  ],
+  Momos: [
+    new DishModel()
+      .setName("Chicken Schezwan Steam Momos")
+      .setIsVeg(false)
+      .setBestSeller(false)
+      .setPrice(238)
+      .setDescription(
+        "Minced soft Juicy boneless Chicken, Coriander & Celery leaf cooked in blend of herbs and spices comes with mouth-watering hot Schezwan flavour (5 Pcs). Served with Spicy Red Sauce and Green Chutney."
+      )
+      .setImage(ChickenSchezwanSteamMomos)
+      .build(),
+
+    new DishModel()
+      .setName("Corn & Cheese Steam Momos")
+      .setIsVeg(true)
+      .setBestSeller(false)
+      .setPrice(185)
+      .setDescription(
+        "Wow! Momo Signature Product: Momos filled with Shredded Cheese and Sweet Corn and mixed with the flavours of Indian Spices. Served with home-made Spicy Red Sauce and Green Chutney."
+      )
+      .setImage(CornCheeseSteamMomos)
       .build(),
   ],
 };

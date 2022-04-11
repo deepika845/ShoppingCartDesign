@@ -1,8 +1,8 @@
 .checkout-button {
   height: 3.125rem;
-  background-color: #60b246;
+
   cursor: pointer;
-  color: #fff;
+
   margin-top: 1.75rem;
   display: flex;
   width: 20rem;
@@ -13,6 +13,14 @@
 }
 .checkout-button:hover {
   box-shadow: 0 0 20px 0px rgb(0 0 0 / 50%);
+}
+.checkout-button--dark {
+  background-color: #60b246;
+  color: #fff;
+}
+.checkout-button--light {
+  background-color: #fff;
+  color: #60b246;
 }
 .cart-Items {
   flex: 1 0 0;
