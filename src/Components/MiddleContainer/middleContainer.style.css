@@ -1,0 +1,9 @@
+.middle-container {
+  background-color: #171a29;
+  color: white;
+  height: 16rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6rem;
+}

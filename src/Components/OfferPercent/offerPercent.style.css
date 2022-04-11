@@ -1,0 +1,7 @@
+.offer-percent {
+  display: flex;
+  flex-direction: column;
+  width: 19rem;
+  height: 13rem;
+  border: 0.0625rem solid #bec0c8;
+}

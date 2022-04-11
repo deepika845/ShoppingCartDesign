@@ -1,0 +1,25 @@
+.header {
+  box-shadow: 0 15px 40px -20px rgb(40 44 63/15%);
+  background: #fff;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5rem;
+}
+
+.header-logo {
+  height: 6rem;
+}
+.header-address {
+  cursor: pointer;
+  font-weight: 700;
+}
+.header-header-address__primary {
+  color: #3d4152;
+  display: inline-block;
+}
+.header-header-address__secondary {
+  color: #686b78;
+  display: inline-block;
+}
